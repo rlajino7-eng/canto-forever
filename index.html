@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canto Forever - Aula Virtual Interactiva</title>
+    <title>Canto Forever - Clase Magistral en Vivo</title>
     <style>
         :root {
-            --bg-main: #0b0f19;
-            --bg-card: #131b2e;
+            --bg-main: #070a13;
+            --bg-card: #0f172a;
             --accent-blue: #38bdf8;
             --accent-gold: #f59e0b;
             --accent-green: #10b981;
@@ -27,7 +27,7 @@
         }
         .container {
             width: 100%;
-            max-width: 950px;
+            max-width: 1000px;
         }
         header {
             text-align: center;
@@ -38,8 +38,7 @@
         header h1 {
             color: var(--accent-blue);
             margin: 0;
-            font-size: 2.4rem;
-            letter-spacing: 1px;
+            font-size: 2.5rem;
         }
         header p {
             color: var(--accent-gold);
@@ -50,19 +49,16 @@
             background-color: var(--bg-card);
             border-radius: 16px;
             padding: 25px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
-            margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+            margin-bottom: 25px;
             border: 1px solid var(--border);
         }
         .section-title {
             color: var(--accent-blue);
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             margin-top: 0;
             border-bottom: 2px solid var(--border);
             padding-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
         .selector-row {
             display: flex;
@@ -72,7 +68,7 @@
         }
         .selector-group {
             flex: 1;
-            min-width: 220px;
+            min-width: 250px;
         }
         label {
             display: block;
@@ -88,83 +84,58 @@
             padding: 14px;
             border-radius: 10px;
             font-size: 1rem;
-            cursor: pointer;
             outline: none;
-        }
-        select:focus {
-            border-color: var(--accent-blue);
+            cursor: pointer;
         }
         .start-btn {
             background: linear-gradient(135deg, #0284c7, #2563eb);
             color: white;
             border: none;
-            padding: 15px;
+            padding: 16px;
             border-radius: 10px;
             font-weight: bold;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             cursor: pointer;
             width: 100%;
             margin-top: 10px;
-            box-shadow: 0 4px 12px rgba(37,99,235,0.4);
-            transition: transform 0.1s ease;
+            box-shadow: 0 4px 15px rgba(37,99,235,0.4);
         }
-        .start-btn:active {
-            transform: scale(0.98);
+        .start-btn:hover {
+            opacity: 0.9;
         }
-        /* Estilo de la Clase en Vivo */
-        .aula-box {
+        /* Estructura de la Clase Magistral de 2 Horas */
+        .masterclass-box {
             border-left: 6px solid var(--accent-gold);
-            background: #0f172a;
+            background: #090d16;
         }
-        .profesor-habla {
-            background: #1a233a;
-            border-left: 4px solid var(--accent-blue);
-            padding: 15px 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 1.05rem;
-            line-height: 1.6;
-        }
-        .ejercicio-interactivo {
-            background: #111e38;
-            border: 1px solid #334155;
-            padding: 20px;
+        .bloque-clase {
+            background: #131d31;
+            border: 1px solid var(--border);
             border-radius: 12px;
-            text-align: center;
-            margin-top: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
         }
-        .cronometro-grande {
-            font-size: 3.5rem;
+        .bloque-header {
+            color: var(--accent-gold);
+            font-size: 1.15rem;
             font-weight: bold;
-            color: var(--accent-green);
-            margin: 15px 0;
-            font-family: monospace;
-        }
-        .control-btns {
+            margin-bottom: 12px;
             display: flex;
-            justify-content: center;
-            gap: 15px;
+            justify-content: space-between;
+            align-items: center;
         }
-        .control-btns button {
-            background: var(--accent-green);
-            color: #0b0f19;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-weight: bold;
+        .bloque-contenido {
+            color: var(--text-main);
             font-size: 1rem;
-            cursor: pointer;
+            line-height: 1.7;
+            white-space: pre-line;
         }
-        .control-btns button.detener {
-            background: #ef4444;
-            color: white;
-        }
-        /* Chat Profesora IA */
+        /* Chat de la Profesora */
         .chat-box {
             background: #070a13;
             border-radius: 10px;
             padding: 15px;
-            height: 180px;
+            height: 200px;
             overflow-y: auto;
             border: 1px solid var(--border);
             margin-bottom: 12px;
@@ -206,7 +177,7 @@
         }
         .chat-input-area button {
             background: var(--accent-gold);
-            color: #0b0f19;
+            color: #070a13;
             border: none;
             padding: 12px 20px;
             border-radius: 8px;
@@ -220,194 +191,225 @@
     <div class="container">
         <header>
             <h1>Canto Forever</h1>
-            <p>🎵 Tu Aula Virtual Privada — Clases Magistrales de 2 Horas</p>
+            <p>🎓 Aula Magistral de Canto — Clases de 2 Horas Detalladas</p>
         </header>
 
         <!-- Selector de Clases -->
         <div class="card">
-            <h2 class="section-title">🎓 Selecciona tu Programa de Estudio</h2>
+            <h2 class="section-title">📅 Selecciona tu Plan de Estudios</h2>
             <div class="selector-row">
                 <div class="selector-group">
-                    <label for="select-mes">Módulo / Mes:</label>
+                    <label for="select-mes">Módulo:</label>
                     <select id="select-mes">
-                        <option value="mes1">Mes 1: Fundamentos, Respiración y Siseo</option>
-                        <option value="mes2">Mes 2: Conexión al Falsete y Agudos</option>
-                        <option value="mes3">Mes 3: Resonancia, Twang y Estilo Cumbia</option>
+                        <option value="mes1">Mes 1: Fundamentos y Respiración</option>
+                        <option value="mes2">Mes 2: Falsete y Voces Agudas</option>
+                        <option value="mes3">Mes 3: Resonancia y Estilo Cumbia</option>
                     </select>
                 </div>
                 <div class="selector-group">
-                    <label for="select-dia">Día de la Semana:</label>
+                    <label for="select-dia">Clase del Día:</label>
                     <select id="select-dia">
-                        <option value="dia1">Día 1: Teoría y Práctica del Apoyo</option>
-                        <option value="dia2">Día 2: Fuelle Abdominal y Ritmo</option>
-                        <option value="dia3">Día 3: Iniciación al Zumbido (Humming)</option>
-                        <option value="dia4">Día 4: Relajación y Postura Laríngea</option>
-                        <option value="dia5">Día 5: Circuito y Autoevaluación</option>
+                        <option value="dia1">Día 1: Anatomía del Aire y Siseo Base</option>
+                        <option value="dia2">Día 2: Control del Fuelle Abdominal</option>
+                        <option value="dia3">Día 3: Zumbidos y Resonancia Frontal</option>
+                        <option value="dia4">Día 4: Eliminación de Tensión Laríngea</option>
+                        <option value="dia5">Día 5: Circuito Práctico de Consolidación</option>
                     </select>
                 </div>
             </div>
-            <button class="start-btn" onclick="iniciarClaseEnVivo()">▶ ¡Comenzar Clase de Hoy!</button>
+            <button class="start-btn" onclick="cargarClaseMagistral()">📚 Dictar Clase Magistral de 2 Horas</button>
         </div>
 
-        <!-- Pantalla del Aula en Vivo (Donde la profesora te enseña) -->
-        <div class="card aula-box" id="aula-interactiva">
-            <h2 style="color: var(--accent-gold); margin-top:0;">Bienvenido al Aula, Rodrigo</h2>
-            <p style="color: var(--text-muted);">Selecciona tu mes y día arriba y presiona "Comenzar Clase de Hoy" para que tu profesora te dicte la lección, te explique la materia y active los ejercicios prácticos cronometrados.</p>
+        <!-- Pantalla de la Clase Magistral Completa -->
+        <div class="card masterclass-box" id="pantalla-masterclass">
+            <h2 style="color: var(--accent-gold); margin-top:0;">Tu clase aparecerá aquí</h2>
+            <p style="color: var(--text-muted);">Selecciona tu mes y día arriba y presiona el botón para que la web te despliegue la clase completa de 2 horas con teoría profunda, guía de práctica y ejercicios paso a paso.</p>
         </div>
 
         <!-- Panel de la Profesora IA -->
         <div class="card">
-            <h2 class="section-title">👩‍🏫 Profesora IA (Tutoría en Directo)</h2>
-            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 12px;">Hazle preguntas a tu profesora mientras estudias si algo no te sale o te duele la garganta:</p>
+            <h2 class="section-title">👩‍🏫 Profesora IA en Directo</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 12px;">Pregúntame lo que necesites mientras estudias tu lección:</p>
             <div class="chat-box" id="chat-mensajes">
-                <div class="msg profesora">¡Hola, Rodrigo! Estoy lista en el aula. Elige tu clase arriba y comencemos a entrenar con todo. ¿Qué duda tienes hoy?</div>
+                <div class="msg profesora">¡Hola, Rodrigo! Estoy aquí para enseñarte de verdad. Elige tu clase y lee con atención cada bloque de la lección. ¿Qué duda te surge?</div>
             </div>
             <div class="chat-input-area">
-                <input type="text" id="input-pregunta" placeholder="Ej: Profesora, ¿cómo sé si estoy usando bien el diafragma?" onkeypress="if(event.key === 'Enter') enviarPregunta()">
+                <input type="text" id="input-pregunta" placeholder="Ej: Profesora, no entiendo cómo funciona el diafragma..." onkeypress="if(event.key === 'Enter') enviarPregunta()">
                 <button onclick="enviarPregunta()">Consultar</button>
             </div>
         </div>
     </div>
 
     <script>
-        const contenidoClases = {
+        const baseClasesCompletas = {
             mes1: {
                 dia1: {
-                    titulo: "Mes 1 - Día 1: Teoría y Práctica del Apoyo",
-                    explicacion: "<strong>👩‍🏫 Lección de la Profesora:</strong><br>Hola Rodrigo. Hoy arrancamos con el pilar absoluto de tu voz: <em>el soporte respiratorio</em>. Cuando cantas cumbia, la presión del aire debe salir desde el abdomen y las costillas flotantes, jamás desde tu cuello. Si inflas el pecho, bloqueas las cuerdas vocales.<br><br><strong>🛠️ Tu Ejercicio Guiado de Hoy:</strong><br>Vamos a hacer el <em>Siseo de Precisión</em> durante 5 minutos continuos. Coloca tus manos en las costillas, inhala en 4 segundos sintiendo que se abren hacia los lados, y exhala haciendo 'ssss' de forma constante.",
-                    tiempoSegs: 300 // 5 min de ejercicio interactivo
+                    titulo: "Mes 1 - Día 1: Anatomía del Aire y Siseo Base (Clase de 2 Horas)",
+                    b1Titulo: "Bloque 1 [00:00 - 00:40] — Teoría Explicada: ¿Por qué fallan los cantantes novatos?",
+                    b1Texto: "• El problema principal: El 90% de las personas respira inflando el pecho y subiendo los hombros. Al hacer esto, los músculos del cuello se ponen rígidos y estrangulan las cuerdas vocales.\n• La solución biomecánica: El motor de tu voz es el diafragma. Al inhalar, este músculo baja y empuja los órganos hacia abajo, obligando a tus costillas flotantes a expandirse hacia los lados y hacia la espalda.\n• Regla de oro para la cumbia: Para sostener una nota larga sin ahogarte, la presión del aire no la hace tu garganta; la regula la faja abdominal conteniendo la salida del aire de forma milimétrica.",
+                    b2Titulo: "Bloque 2 [00:40 - 01:20] — Práctica Guiada: Dominando el Siseo de Precisión",
+                    b2Texto: "• Paso 1 (Postura): Colócate frente a un espejo. Pon tus manos sobre tus costillas flotantes (a los lados de la cintura). Relaja los hombros por completo.\n• Paso 2 (Inhalación): Inhala por la nariz de forma silenciosa durante 4 segundos. Debes sentir cómo tus manos se separan impulsadas por la expansión lateral de tus costillas. Prohibido inflar el pecho.\n• Paso 3 (Exhalación controlada): Exhala emitiendo un sonido 'ssss' continuo y parejo (como una fuga de aire en un neumático).\n• Paso 4 (Regulación): Imagina que tu abdomen es un fuelle que intenta resistirse a cerrarse de golpe. Mantén el siseo constante durante 30 a 40 segundos sin vaciar todo el aire de golpe.",
+                    b3Titulo: "Bloque 3 [01:20 - 02:00] — Ejercicios de Consolidación y Autoevaluación",
+                    b3Texto: "• Ejercicio 1 (Series de resistencia): Realiza 6 repeticiones seguidas del siseo de 35 segundos. Descansa exactamente 15 segundos entre cada serie.\n• Ejercicio 2 (Control al espejo): Vigila estrictamente que en ninguna de las 6 series tus hombros se levanten ni un centímetro.\n• Tarea de registro: Si al terminar sientes mareo, respiraste demasiado rápido; haz las inhalaciones más lentas y profundas en la próxima sesión."
                 },
                 dia2: {
-                    titulo: "Mes 1 - Día 2: Fuelle Abdominal y Resistencia",
-                    explicacion: "<strong>👩‍🏫 Lección de la Profesora:</strong><br>Hoy trabajaremos el control hidráulico del abdomen. Necesitamos que los músculos abdominales actúen como un resorte que empuja el aire de forma limpia para los giros rítmicos de la cumbia.<br><br><strong>🛠️ Tu Ejercicio Guiado de Hoy:</strong><br>Ejecutaremos golpes de aire cortos y rítmicos ('tss-tss-tss') usando únicamente la pared abdominal, manteniendo la garganta completamente libre de tensión.",
-                    tiempoSegs: 300
+                    titulo: "Mes 1 - Día 2: Control del Fuelle Abdominal (Clase de 2 Horas)",
+                    b1Titulo: "Bloque 1 [00:00 - 00:40] — Teoría Explicada: La presión subglótica y los graves",
+                    b1Texto: "• Explicación: Para cantar con ritmo y potencia en la cumbia, los ataques vocales deben ser limpios. El abdomen funciona como un pistón hidráulico que da los impulsos de aire necesarios para las notas rítmicas sin dañar tus pliegues vocales.",
+                    b2Titulo: "Bloque 2 [00:40 - 01:20] — Práctica Guiada: Golpes de aire con Staccato ('tss')",
+                    b2Texto: "• Paso 1: Inhala profundo expandiendo costillas.\n• Paso 2: Emite sonidos cortos y rítmicos de 'tss-tss-tss-tss' consecutivos usando únicamente el impulso de la pared abdominal.\n• Paso 3: Mantén la garganta completamente abierta, imaginando que bostezas por dentro mientras tus abdominales hacen el trabajo pesado.",
+                    b3Titulo: "Bloque 3 [01:20 - 02:00] — Ejercicios de Consolidación y Autoevaluación",
+                    b3Texto: "• Ejercicio 1: Realiza 4 series de 30 pulsaciones continuas de 'tss'.\n• Ejercicio 2: Tócate el cuello con una mano mientras haces el ejercicio; si sientes que los músculos del cuello se endurecen, detente y relaja."
                 },
                 dia3: {
-                    titulo: "Mes 1 - Día 3: Iniciación al Zumbido (Humming)",
-                    explicacion: "<strong>👩‍🏫 Lección de la Profesora:</strong><br>El aire ya está controlado; ahora lo llevaremos a los resonadores. Hoy aprenderás a usar la 'máscara' (pómulos y nariz) para amplificar tu voz sin gastar energía de más.<br><br><strong>🛠️ Tu Ejercicio Guiado de Hoy:</strong><br>Haz zumbidos suaves en 'mmmm' con la boca cerrada por fuera pero amplia por dentro. Tócate los pómulos para sentir la vibración metálica.",
-                    tiempoSegs: 300
+                    titulo: "Mes 1 - Día 3: Zumbidos y Resonancia Frontal (Clase de 2 Horas)",
+                    b1Titulo: "Bloque 1 [00:00 - 00:40] — Teoría Explicada: La amplificación natural en la máscara",
+                    b1Texto: "• Explicación: Las cuerdas vocales por sí solas suenan despacio y con poca fuerza. El cuerpo humano tiene cámaras de resonancia ósea en los pómulos, la nariz y el cráneo. Cuando envías el sonido allí, este se amplifica gratis sin forzar la garganta.",
+                    b2Titulo: "Bloque 2 [00:40 - 01:20] — Práctica Guiada: El zumbido interno ('Humming')",
+                    b2Texto: "• Paso 1: Mantén los labios cerrados suavemente pero los dientes separados por dentro (creando una cavidad amplia).\n• Paso 2: Emite un sonido sostenido de 'mmmmmm'.\n• Paso 3: Concéntrate en sentir cosquilleo directo en los labios y en los pómulos. Si pica la garganta, estás cerrando mal el espacio interno.",
+                    b3Titulo: "Bloque 3 [01:20 - 02:00] — Ejercicios de Consolidación y Autoevaluación",
+                    b3Texto: "• Ejercicio 1: Sirenas vocales con 'mmmm', subiendo desde tu nota más baja hasta la más alta y bajando de nuevo de forma muy suave.\n• Ejercicio 2: Haz 10 repeticiones sintiendo el cambio de vibración."
                 },
                 dia4: {
-                    titulo: "Mes 1 - Día 4: Relajación y Postura Laríngea",
-                    explicacion: "<strong>👩‍🏫 Lección de la Profesora:</strong><br>La tensión es el enemigo silencioso del cantante. Si tu mandíbula está apretada, el sonido se estrangula. Hoy haremos liberación cervical y laríngea.<br><br><strong>🛠️ Tu Ejercicio Guiado de Hoy:</strong><br>Rotaciones suaves de cuello combinadas con vocales abiertas, verificando al espejo que los hombros no se levanten.",
-                    tiempoSegs: 300
+                    titulo: "Mes 1 - Día 4: Eliminación de Tensión Laríngea (Clase de 2 Horas)",
+                    b1Titulo: "Bloque 1 [00:00 - 00:40] — Teoría Explicada: El peligro de la mandíbula rígida",
+                    b1Texto: "• Explicación: La mandíbula y la lengua están conectadas directamente con la laringe. Si muerdes con fuerza o aprietas los dientes al cantar, bloqueas el paso del sonido y generas fatiga vocal rápida.",
+                    b2Titulo: "Bloque 2 [00:40 - 01:20] — Práctica Guiada: Liberación cervical y masajes",
+                    b2Texto: "• Paso 1: Haz masajes circulares con los dedos en las articulaciones de la mandíbula (donde se une con el oído).\n• Paso 2: Realiza giros lentos de cabeza soltando el peso del cuello.\n• Paso 3: Emite vocales abiertas relajando la lengua contra los dientes inferiores.",
+                    b3Titulo: "Bloque 3 [01:20 - 02:00] — Ejercicios de Consolidación y Autoevaluación",
+                    b3Texto: "• Ejercicio 1: Canta una frase corta abriendo la boca verticalmente (como un bostezo) y verifica la ausencia de tensión."
                 },
                 dia5: {
-                    titulo: "Mes 1 - Día 5: Circuito y Autoevaluación Semanal",
-                    explicacion: "<strong>👩‍🏫 Lección de la Profesora:</strong><br>¡Llegó el cierre de semana! Hoy uniremos los 4 pilares anteriores en un solo bloque de entrenamiento fluido para medir tu resistencia real.<br><br><strong>🛠️ Tu Ejercicio Guiado de Hoy:</strong><br>Circuito continuo: 2 min de respiración + 2 min de siseo + 2 min de zumbidos. ¡Vamos a darle con todo!",
-                    tiempoSegs: 360
+                    titulo: "Mes 1 - Día 5: Circuito Práctico de Consolidación (Clase de 2 Horas)",
+                    b1Titulo: "Bloque 1 [00:00 - 00:40] — Teoría Explicada: Integración de pilares",
+                    b1Texto: "• Explicación: Hoy juntamos respiración, control abdominal y resonancia en un solo bloque estructurado para comprobar tu avance al finalizar la primera semana.",
+                    b2Titulo: "Bloque 2 [00:40 - 01:20] — Práctica Guiada: Circuito continuo de 40 minutos",
+                    b2Texto: "• Secuencia: 10 min de respiración y siseo + 10 min de fuelle abdominal ('tss') + 10 min de zumbidos ('humming') + 10 min de relajación laríngea.",
+                    b3Titulo: "Bloque 3 [01:20 - 02:00] — Ejercicios de Consolidación y Autoevaluación",
+                    b3Texto: "• Ejercicio final: Grábate cantando una canción completa y evalúa si tu respiración se mantuvo estable de principio a fin."
                 }
             },
             mes2: {
                 dia1: {
-                    titulo: "Mes 2 - Día 1: Introducción al Falsete",
-                    explicacion: "<strong>👩‍🏫 Lección de la Profesora:</strong><br>Hoy entramos al terreno de los agudos. El falsete no es gritar más fuerte, es estirar los pliegues vocales con una columna de aire ligera y constante.<br><br><strong>🛠️ Tu Ejercicio Guiado de Hoy:</strong><br>El ejercicio del Búho ('juuu-juuu'). Desliza la voz de notas medias a agudas buscando la ligereza total en la cabeza.",
-                    tiempoSegs: 300
+                    titulo: "Mes 2 - Día 1: Introducción al Falsete y Voz de Cabeza (Clase de 2 Horas)",
+                    b1Titulo: "Bloque 1 [00:00 - 00:40] — Teoría Explicada: ¿Qué es el falsete?",
+                    b1Texto: "• Explicación: El falsete ocurre cuando los pliegues vocales se estiran y adelgazan, permitiendo emitir notas agudas sin la carga pesada del registro de pecho.",
+                    b2Titulo: "Bloque 2 [00:40 - 01:20] — Práctica Guiada: El ejercicio del Búho",
+                    b2Texto: "• Paso 1: Emite un sonido de 'juuu-juuu' muy ligero.\n• Paso 2: Desliza el tono de notas medias hacia arriba buscando la ligereza en la cabeza sin gritar.",
+                    b3Titulo: "Bloque 3 [01:20 - 02:00] — Ejercicios de Consolidación y Autoevaluación",
+                    b3Texto: "• Ejercicio 1: 15 sirenas en falsete buscando que el paso de nota sea limpio y sin gallos."
                 },
                 dia2: {
-                    titulo: "Mes 2 - Día 2: Transición de Pecho a Falsete",
-                    explicacion: "<strong>👩‍🏫 Lección de la Profesora:</strong><br>El paso por el 'puente' vocal suele quebrarse si empujas de golpe. Hoy aprenderemos a suavizar esa bisagra para que el cambio sea invisible.<br><br><strong>🛠️ Jurisdicción Práctica:</strong> Escalas deslizantes con vocal 'U' muy suave.",
-                    tiempoSegs: 300
+                    titulo: "Mes 2 - Día 2: Control del Puente Vocal (Clase de 2 Horas)",
+                    b1Titulo: "Bloque 1 [00:00 - 00:40] — Teoría Explicada: Superando el quiebre de voz",
+                    b1Texto: "• Explicación: El puente es la zona de transición. Al llegar allí, debes aligerar el flujo de aire para cruzar sin tropezar.",
+                    b2Titulo: "Bloque 2 [00:40 - 01:20] — Práctica Guiada: Escalas con vocal 'U'",
+                    b2Texto: "• Ejecución: Sube y baja escalas usando la vocal 'U' de forma muy redonda y suave.",
+                    b3Titulo: "Bloque 3 [01:20 - 02:00] — Ejercicios de Consolidación y Autoevaluación",
+                    b3Texto: "• Ejercicio 1: 20 pasajes limpios de pecho a cabeza."
                 },
                 dia3: {
-                    titulo: "Mes 2 - Día 3: Proyección y Brillo en Notas Altas",
-                    explicacion: "<strong>👩‍🏫 Lección de la Profesora:</strong><br>Colocaremos los agudos directo en los resonadores frontales para que tus coros de cumbia destaquen con claridad cristalina.",
-                    tiempoSegs: 300
+                    titulo: "Mes 2 - Día 3: Brillo en Notas Altas (Clase de 2 Horas)",
+                    b1Titulo: "Bloque 1 [00:00 - 00:40] — Teoría Explicada: Proyección superior",
+                    b1Texto: "• Explicación: Conectamos el falsete con la máscara frontal para dar brillo cristalino.",
+                    b2Titulo: "Bloque 2 [00:40 - 01:20] — Práctica Guiada: Vocales abiertas en agudos",
+                    b2Texto: "• Ejecución: Emisión de notas altas usando combinaciones de vocales ajustadas.",
+                    b3Titulo: "Bloque 3 [01:20 - 02:00] — Ejercicios de Consolidación y Autoevaluación",
+                    b3Texto: "• Ejercicio 1: Práctica de sostenidos agudos."
                 },
                 dia4: {
-                    titulo: "Mes 2 - Día 4: Control Dinámico de Volumen",
-                    explicacion: "<strong>👩‍🏫 Lección de la Profesora:</strong><br>Aprenderás a modular el volumen en notas altas (hacerlas suaves y luego fuertes) sin perder el soporte abdominal.",
-                    tiempoSegs: 300
+                    titulo: "Mes 2 - Día 4: Dinámicas de Volumen (Clase de 2 Horas)",
+                    b1Titulo: "Bloque 1 [00:00 - 00:40] — Teoría Explicada: Control de intensidad en falsete",
+                    b1Texto: "• Explicación: Aprender a modular el volumen sin perder el soporte del diafragma.",
+                    b2Titulo: "Bloque 2 [00:40 - 01:20] — Práctica Guiada: Crescendo y decrescendo",
+                    b2Texto: "• Ejecución: Pasar de suave a fuerte en una misma nota aguda.",
+                    b3Titulo: "Bloque 3 [01:20 - 02:00] — Ejercicios de Consolidación y Autoevaluación",
+                    b3Texto: "• Ejercicio 1: Prácticas de control dinámico."
                 },
                 dia5: {
-                    titulo: "Mes 2 - Día 5: Falsete Aplicado a Cumbia",
-                    explicacion: "<strong>👩‍🏫 Lección de la Profesora:</strong><br>Integraremos el falsete en fragmentos rítmicos de cumbia para ganar agilidad melódica.",
-                    tiempoSegs: 300
+                    titulo: "Mes 2 - Día 5: Falsete en Cumbia (Clase de 2 Horas)",
+                    b1Titulo: "Bloque 1 [00:00 - 00:40] — Teoría Explicada: Aplicación rítmica",
+                    b1Texto: "• Explicación: Integración de la voz de cabeza en los coros melódicos tropicales.",
+                    b2Titulo: "Bloque 2 [00:40 - 01:20] — Práctica Guiada: Fraseo melódico agudo",
+                    b2Texto: "• Ejecución: Práctica sobre estructuras de cumbia.",
+                    b3Titulo: "Bloque 3 [01:20 - 02:00] — Ejercicios de Consolidación y Autoevaluación",
+                    b3Texto: "• Ejercicio 1: Autoevaluación de falsete aplicado."
                 }
             },
             mes3: {
                 dia1: {
-                    titulo: "Mes 3 - Día 1: Resonancia y Brillo (Twang)",
-                    explicacion: "<strong>👩‍🏫 Lección de la Profesora:</strong><br>El Twang le da el toque metálico y potente a tu voz para que corte la mezcla instrumental de la banda sin lastimar tu garganta.",
-                    tiempoSegs: 300
+                    titulo: "Mes 3 - Día 1: Resonancia y Brillo Metálico - Twang (Clase de 2 Horas)",
+                    b1Titulo: "Bloque 1 [00:00 - 00:40] — Teoría Explicada: ¿Qué es el Twang?",
+                    b1Texto: "• Explicación: El Twang estrecha el esfínter epiglótico para dar un timbre metálico que corta la mezcla de la banda.",
+                    b2Titulo: "Bloque 2 [00:40 - 01:20] — Práctica Guiada: Sonido de bocina o maullido",
+                    b2Texto: "• Ejecución: Emisión frontal brillante.",
+                    b3Titulo: "Bloque 3 [01:20 - 02:00] — Ejercicios de Consolidación y Autoevaluación",
+                    b3Texto: "• Ejercicio 1: Práctica de proyección metálica."
                 },
                 dia2: {
-                    titulo: "Mes 3 - Día 2: Resistencia para Shows Largos",
-                    explicacion: "<strong>👩‍🏫 Lección de la Profesora:</strong><br>Entrenamiento de alta resistencia para preparar tus cuerdas ante presentaciones prolongadas.",
-                    tiempoSegs: 300
+                    titulo: "Mes 3 - Día 2: Resistencia para Shows Largos (Clase de 2 Horas)",
+                    b1Titulo: "Bloque 1 [00:00 - 00:40] — Teoría Explicada: Prevención de fatiga",
+                    b1Texto: "• Explicación: Cómo dosificar la energía vocal para presentaciones de larga duración.",
+                    b2Titulo: "Bloque 2 [00:40 - 01:20] — Práctica Guiada: Bloques continuos de canto",
+                    b2Texto: "• Ejecución: Ensayo de alta resistencia.",
+                    b3Titulo: "Bloque 3 [01:20 - 02:00] — Ejercicios de Consolidación y Autoevaluación",
+                    b3Texto: "• Ejercicio 1: Evaluación de fatiga y recuperación."
                 },
                 dia3: {
-                    titulo: "Mes 3 - Día 3: Estilo, Matices e Intención Tropical",
-                    explicacion: "<strong>👩‍🏫 Lección de la Profesora:</strong><br>La técnica ya la tienes; hoy trabajaremos la interpretación y el carácter único que necesita tu cumbia.",
-                    tiempoSegs: 300
+                    titulo: "Mes 3 - Día 3: Estilo e Intención Tropical (Clase de 2 Horas)",
+                    b1Titulo: "Bloque 1 [00:00 - 00:40] — Teoría Explicada: Sabor y matices en la cumbia",
+                    b1Texto: "• Explicación: Cómo dar identidad y alma a tus interpretaciónes.",
+                    b2Titulo: "Bloque 2 [00:40 - 01:20] — Práctica Guiada: Interpretación de canciones",
+                    b2Texto: "• Ejecución: Ensayo enfocado en canciones propias.",
+                    b3Titulo: "Bloque 3 [01:20 - 02:00] — Ejercicios de Consolidación y Autoevaluación",
+                    b3Texto: "• Ejercicio 1: Grabación con intención artística."
                 },
                 dia4: {
-                    titulo: "Mes 3 - Día 4: Uso de Micrófono y Dinámica",
-                    explicacion: "<strong>👩‍🏫 Lección de la Profesora:</strong><br>Cómo pararse frente al micrófono, la distancia ideal y el control de los graves por proximidad.",
-                    tiempoSegs: 300
+                    titulo: "Mes 3 - Día 4: Micrófono y Técnica de Estudio (Clase de 2 Horas)",
+                    b1Titulo: "Bloque 1 [00:00 - 00:40] — Teoría Explicada: Distancia y proximidad al mic",
+                    b1Texto: "• Explicación: Uso correcto del micrófono en vivo y en estudio.",
+                    b2Titulo: "Bloque 2 [00:40 - 01:20] — Práctica Guiada: Dinámica frente al micrófono",
+                    b2Texto: "• Ejecución: Práctica de control de volumen al cantar.",
+                    b3Titulo: "Bloque 3 [01:20 - 02:00] — Ejercicios de Consolidación y Autoevaluación",
+                    b3Texto: "• Ejercicio 1: Adaptación al equipo de sonido."
                 },
                 dia5: {
-                    titulo: "Mes 3 - Día 5: Concierto de Prueba y Cierre",
-                    explicacion: "<strong>👩‍🏫 Lección de la Profesora:</strong><br>Simulación completa de repertorio aplicando todo el ciclo de 3 meses de estudio.",
-                    tiempoSegs: 300
+                    titulo: "Mes 3 - Día 5: Concierto de Prueba y Cierre de Ciclo (Clase de 2 Horas)",
+                    b1Titulo: "Bloque 1 [00:00 - 00:40] — Teoría Explicada: Balance general del método",
+                    b1Texto: "• Explicación: Repaso final de los logros vocales obtenidos en los 3 meses.",
+                    b2Titulo: "Bloque 2 [00:40 - 01:20] — Práctica Guiada: Simulación de show completo",
+                    b2Texto: "• Ejecución: Interpretación de repertorio de principio a fin.",
+                    b3Titulo: "Bloque 3 [01:20 - 02:00] — Ejercicios de Consolidación y Autoevaluación",
+                    b3Texto: "• Ejercicio 1: Evaluación final de rendimiento."
                 }
             }
         };
 
-        let timerAula;
-
-        function iniciarClaseEnVivo() {
+        function cargarClaseMagistral() {
             const mes = document.getElementById('select-mes').value;
             const dia = document.getElementById('select-dia').value;
-            const clase = contenidoClases[mes][dia];
+            const clase = baseClasesCompletas[mes][dia];
 
             const html = `
-                <h2 style="color: var(--accent-gold); margin-top:0;">${clase.titulo}</h2>
-                <div class="profesor-habla">
-                    ${clase.explicacion}
+                <h2 style="color: var(--accent-gold); margin-top:0; font-size: 1.5rem;">${clase.titulo}</h2>
+                
+                <div class="bloque-clase">
+                    <div class="bloque-header"><span>${clase.b1Titulo}</span></div>
+                    <div class="bloque-contenido">${clase.b1Texto}</div>
                 </div>
-                <div class="ejercicio-interactivo">
-                    <p style="margin:0; color: var(--text-muted); font-weight: bold;">CRONÓMETRO DE PRÁCTICA GUIADA</p>
-                    <div class="cronometro-grande" id="reloj-aula">--:--</div>
-                    <div class="control-btns">
-                        <button onclick="iniciarRelojAula(${clase.tiempoSegs})">▶ Iniciar Ejercicio</button>
-                        <button class="detener" onclick="pararRelojAula(${clase.tiempoSegs})">⏸ Pausar / Reiniciar</button>
-                    </div>
+
+                <div class="bloque-clase">
+                    <div class="bloque-header"><span>${clase.b2Titulo}</span></div>
+                    <div class="bloque-contenido">${clase.b2Texto}</div>
+                </div>
+
+                <div class="bloque-clase">
+                    <div class="bloque-header"><span>${clase.b3Titulo}</span></div>
+                    <div class="bloque-contenido">${clase.b3Texto}</div>
                 </div>
             `;
 
-            document.getElementById('aula-interactiva').innerHTML = html;
-            pararRelojAula(clase.tiempoSegs);
-        }
-
-        function iniciarRelojAula(segundosTotales) {
-            clearInterval(timerAula);
-            let tiempoRestante = segundosTotales;
-            actualizarDisplayAula(tiempoRestante);
-
-            timerAula = setInterval(() => {
-                if (tiempoRestante > 0) {
-                    tiempoRestante--;
-                    actualizarDisplayAula(tiempoRestante);
-                } else {
-                    clearInterval(timerAula);
-                    document.getElementById('reloj-aula').textContent = "¡BLOQUE SUPERADO!";
-                }
-            }, 1000);
-        }
-
-        function pararRelojAula(segundosTotales) {
-            clearInterval(timerAula);
-            actualizarDisplayAula(segundosTotales);
-        }
-
-        function actualizarDisplayAula(segs) {
-            let m = Math.floor(segs / 60);
-            let s = segs % 60;
-            let mStr = m < 10 ? '0' + m : m;
-            let sStr = s < 10 ? '0' + s : s;
-            const disp = document.getElementById('reloj-aula');
-            if(disp) disp.textContent = `${mStr}:${sStr}`;
+            document.getElementById('pantalla-masterclass').innerHTML = html;
         }
 
         function enviarPregunta() {
@@ -421,15 +423,15 @@
             chatBox.scrollTop = chatBox.scrollHeight;
 
             setTimeout(() => {
-                let respuesta = "¡Muy bien pensado, Rodrigo! Recuerda mantener el enfoque en la respiración abdominal. Si tienes dudas con la teoría de hoy, repítela con calma frente al espejo.";
+                let respuesta = "¡Excelente pregunta, Rodrigo! Revisa con calma el Bloque 2 de tu lección de hoy y aplícalo paso a paso frente al espejo. ¡Aquí estoy para guiarte!";
                 
                 const t = texto.toLowerCase();
                 if(t.includes('dolor') || t.includes('garganta') || t.includes('pica')) {
-                    respuesta = "⚠️ ¡Atención! Si sientes molestias, detén el ejercicio inmediatamente. Toma agua y relaja el cuello. La voz nunca debe doler.";
+                    respuesta = "⚠️ ¡Detén la práctica de inmediato! Si te duele o pica la garganta, estás empujando con la musculatura del cuello en vez del diafragma. Bebe agua tibia y descansa 2 minutos.";
                 } else if(t.includes('agudo') || t.includes('falsete')) {
-                    respuesta = "🎵 Para los agudos: mantén el paladar alto y deja que el aire fluya ligero hacia tus pómulos.";
-                } else if(t.includes('diafragma') || t.includes('aire')) {
-                    respuesta = "🌬️ El diafragma se entrena sintiendo cómo se expanden tus costillas flotantes al inhalar. ¡Pruébalo con las manos en la cintura!";
+                    respuesta = "🎵 Para los agudos: recuerda aligerar el flujo de aire y enviar la resonancia hacia los pómulos sin apretar la mandíbula.";
+                } else if(t.includes('diafragma') || t.includes('aire') || t.includes('respirar')) {
+                    respuesta = "🌬️ Para dominar el aire: tus costillas flotantes deben expandirse hacia los lados al inhalar, y el abdomen frena la salida como un fuelle.";
                 }
 
                 chatBox.innerHTML += `<div class="msg profesora">${respuesta}</div>`;
