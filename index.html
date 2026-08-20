@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Canto Forever - Tu Profesora Vocal</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; background: #0f172a; color: white; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        .card { background: #1e293b; padding: 25px; border-radius: 15px; width: 80%; max-width: 600px; margin-bottom: 20px; box-shadow: 0 10px 15px rgba(0,0,0,0.5); }
+        button { background: #38bdf8; border: none; padding: 15px; border-radius: 8px; color: #0f172a; font-weight: bold; cursor: pointer; width: 100%; margin-top: 10px; }
+        #leccion-display { border-left: 4px solid #38bdf8; padding-left: 15px; }
+    </style>
+</head>
+<body>
+
+    <h1>Canto Forever</h1>
+    <div class="card">
+        <h2>Selecciona tu Clase de Hoy</h2>
+        <button onclick="mostrarLeccion('respiracion')">Módulo 1: Respiración y Apoyo</button>
+        <button onclick="mostrarLeccion('falsete')">Módulo 2: Dominio del Falsete</button>
+    </div>
+
+    <div class="card" id="leccion-display">
+        <h2>Selecciona una clase para comenzar</h2>
+        <p>Tu profesora está lista. Selecciona un módulo para que te explique la teoría y el ejercicio técnico.</p>
+    </div>
+
+    <script>
+        const lecciones = {
+            respiracion: {
+                titulo: "Respiración y Apoyo Diafragmático",
+                contenido: "Para la cumbia, el aire es tu motor. Inhala expandiendo costillas (no hombros). Haz el ejercicio del Siseo: exhala en 'S' controlada durante 30 segundos. ¡Mantén el abdomen firme!"
+            },
+            falsete: {
+                titulo: "Dominio del Falsete",
+                contenido: "El falsete requiere relajación laríngea. Imagina que el sonido sale por la parte superior de tu cabeza. Haz 'glissandos' suaves de grave a agudo sin presionar."
+            }
+        };
+
+        function mostrarLeccion(id) {
+            const l = lecciones[id];
+            document.getElementById('leccion-display').innerHTML = `<h2>${l.titulo}</h2><p>${l.contenido}</p>`;
+        }
+    </script>
+</body>
+</html>
