@@ -2,43 +2,255 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Canto Forever - Tu Profesora Vocal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canto Forever - Academia Vocal</title>
     <style>
-        body { font-family: 'Arial', sans-serif; background: #0f172a; color: white; display: flex; flex-direction: column; align-items: center; padding: 20px; }
-        .card { background: #1e293b; padding: 25px; border-radius: 15px; width: 80%; max-width: 600px; margin-bottom: 20px; box-shadow: 0 10px 15px rgba(0,0,0,0.5); }
-        button { background: #38bdf8; border: none; padding: 15px; border-radius: 8px; color: #0f172a; font-weight: bold; cursor: pointer; width: 100%; margin-top: 10px; }
-        #leccion-display { border-left: 4px solid #38bdf8; padding-left: 15px; }
+        :root {
+            --bg-dark: #090d16;
+            --card-bg: #131c2e;
+            --accent: #38bdf8;
+            --accent-green: #10b981;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #1e293b;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 850px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px;
+        }
+        header h1 {
+            color: var(--accent);
+            margin: 0 0 5px 0;
+            font-size: 2.2rem;
+        }
+        header p {
+            color: var(--text-muted);
+            margin: 0;
+        }
+        .section-title {
+            color: var(--accent);
+            font-size: 1.3rem;
+            margin-top: 0;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 8px;
+        }
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 14px;
+            padding: 25px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            margin-bottom: 25px;
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+        button {
+            background-color: #1e293b;
+            border: 2px solid #334155;
+            padding: 14px;
+            border-radius: 10px;
+            color: var(--text-main);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+        button:hover {
+            border-color: var(--accent);
+            background-color: #2563eb;
+            color: #fff;
+        }
+        .class-content {
+            border-left: 5px solid var(--accent);
+            padding-left: 20px;
+        }
+        .phase-box {
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 12px 0;
+            border: 1px solid var(--border);
+        }
+        .phase-time {
+            color: var(--accent);
+            font-weight: bold;
+        }
+        .timer-container {
+            text-align: center;
+            background: #0b1322;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border: 1px solid var(--border);
+        }
+        .timer-display {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--accent-green);
+            margin: 10px 0;
+        }
+        .timer-btns {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .timer-btns button {
+            text-align: center;
+            background-color: var(--accent-green);
+            border: none;
+            color: #000;
+        }
+        .timer-btns button.reset {
+            background-color: #ef4444;
+            color: #fff;
+        }
     </style>
 </head>
 <body>
 
-    <h1>Canto Forever</h1>
-    <div class="card">
-        <h2>Selecciona tu Clase de Hoy</h2>
-        <button onclick="mostrarLeccion('respiracion')">Módulo 1: Respiración y Apoyo</button>
-        <button onclick="mostrarLeccion('falsete')">Módulo 2: Dominio del Falsete</button>
-    </div>
+    <div class="container">
+        <header>
+            <h1>Canto Forever</h1>
+            <p>Plataforma de Entrenamiento Vocal Profesional — Enfoque Cumbia</p>
+        </header>
 
-    <div class="card" id="leccion-display">
-        <h2>Selecciona una clase para comenzar</h2>
-        <p>Tu profesora está lista. Selecciona un módulo para que te explique la teoría y el ejercicio técnico.</p>
+        <!-- Selector de Módulos -->
+        <div class="card">
+            <h2 class="section-title">Selecciona tu Sesión de Entrenamiento (1 Hora)</h2>
+            <div class="menu-grid">
+                <button onclick="cargarClase('sesion1')">🎤 Sesión 1: Respiración y Apoyo</button>
+                <button onclick="cargarClase('sesion2')">🎶 Sesión 2: Conexión al Falsete</button>
+                <button onclick="cargarClase('sesion3')">🔥 Sesión 3: Resonancia y Brillo (Twang)</button>
+            </div>
+        </div>
+
+        <!-- Pantalla de la Clase Activa -->
+        <div class="card class-content" id="panel-clase">
+            <h2 style="color: var(--accent); margin-top:0;">Bienvenido a tu Academia</h2>
+            <p style="color: var(--text-muted);">Selecciona arriba la sesión que realizarás hoy para desplegar la estructura completa de tu hora de práctica, explicaciones técnicas y cronómetro de apoyo.</p>
+        </div>
     </div>
 
     <script>
-        const lecciones = {
-            respiracion: {
-                titulo: "Respiración y Apoyo Diafragmático",
-                contenido: "Para la cumbia, el aire es tu motor. Inhala expandiendo costillas (no hombros). Haz el ejercicio del Siseo: exhala en 'S' controlada durante 30 segundos. ¡Mantén el abdomen firme!"
+        const baseClases = {
+            sesion1: {
+                titulo: "Sesión 1: Dominio de la Respiración y Apoyo Costo-Diafragmático",
+                objetivo: "Aprender a gestionar el aire sin saturar la laringe, base fundamental para sostener frases largas en la cumbia.",
+                fases: [
+                    { tiempo: "Min 00 - 15 | Activación y Postura", desc: "Escaneo corporal de pies a cabeza. Libera tensión en hombros y cuello. Realiza respiraciones costo-diafragmáticas expandiendo las costillas flotantes hacia los lados (cero hombros arriba)." },
+                    { tiempo: "Min 15 - 35 | Calentamiento Técnico", desc: "Práctica del siseo controlado. Inhala en 4 tiempos y exhala emitiendo una 's' constante cuidando que el abdomen mantenga la presión firme como un cinturón." },
+                    { tiempo: "Min 35 - 50 | Aplicación Práctica", desc: "Fraseo rítmico hablado sobre base de cumbia, controlando que la salida de aire sea uniforme y sin golpes en la garganta." },
+                    { tiempo: "Min 50 - 60 | Enfriamiento", desc: "Glissandos descendentes muy suaves y estiramientos cervicales para relajar los músculos laríngeos." }
+                ],
+                cronometroSegs: 1800 // 30 mins de ejercicio principal
             },
-            falsete: {
-                titulo: "Dominio del Falsete",
-                contenido: "El falsete requiere relajación laríngea. Imagina que el sonido sale por la parte superior de tu cabeza. Haz 'glissandos' suaves de grave a agudo sin presionar."
+            sesion2: {
+                titulo: "Sesion 2: Conexión Fluida al Falsete y Voz de Cabeza",
+                objetivo: "Alcanzar notas agudas limpias, con ligereza y sin forzar las cuerdas vocales.",
+                fases: [
+                    { tiempo: "Min 00 - 15 | Respiración Preparatoria", desc: "Activación del diafragma y siseo suave para preparar la columna de aire." },
+                    { tiempo: "Min 15 - 35 | Ejercicios de 'El Búho' y Zumbidos", desc: "Emisión de zumbidos suaves (humming) en registro medio y deslizamiento hacia voz de cabeza buscando la resonancia superior." },
+                    { tiempo: "Min 35 - 50 | Práctica de Falsete en Cumbia", desc: "Aplicación del falsete en fragmentos melódicos agudos, manteniendo la mandíbula totalmente relajada." },
+                    { tiempo: "Min 50 - 60 | Relajación y Cierre", desc: "Vibración de labios flojos (lip trills) hacia abajo para descomprimir la zona alta." }
+                ],
+                cronometroSegs: 1200
+            },
+            sesion3: {
+                titulo: "Sesión 3: Resonancia Frontal y Brillo (Twang)",
+                objetivo: "Conseguir la potencia necesaria para destacar sobre los instrumentos sin gritar ni lastimar la voz.",
+                fases: [
+                    { tiempo: "Min 00 - 15 | Estiramiento y Conexión", desc: "Alineación corporal y apertura del espaço interno en la garganta." },
+                    { tiempo: "Min 15 - 35 | Búsqueda de la Máscara", desc: "Emisión de sonidos agudos y frontales enfocados en los pómulos y la zona de la nariz." },
+                    { tiempo: "Min 35 - 50 | Proyección Limpia", desc: "Ataque vocal claro y brillante simulando el timbre requerido para cortar la mezcla de la cumbia." },
+                    { tiempo: "Min 50 - 60 | Enfriamiento Laríngeo", desc: "Susurros sonorizados y relajación general." }
+                ],
+                cronometroSegs: 1200
             }
         };
 
-        function mostrarLeccion(id) {
-            const l = lecciones[id];
-            document.getElementById('leccion-display').innerHTML = `<h2>${l.titulo}</h2><p>${l.contenido}</p>`;
+        let temporizador;
+
+        function cargarClase(id) {
+            clearInterval(temporizador);
+            const cl = baseClases[id];
+
+            let html = `
+                <h2 style="color: var(--accent); margin-top:0;">${cl.titulo}</h2>
+                <p><strong>Objetivo de la Sesión:</strong> ${cl.objetivo}</p>
+                <h3 style="color: var(--text-main); margin-top: 20px;">Estructura de la Práctica (1 Hora):</h3>
+            `;
+
+            cl.fases.forEach(f => {
+                html += `
+                    <div class="phase-box">
+                        <div class="phase-time">${f.tiempo}</div>
+                        <p style="margin: 5px 0 0 0; color: var(--text-muted);">${f.desc}</p>
+                    </div>
+                `;
+            });
+
+            html += `
+                <div class="timer-container">
+                    <p style="margin:0; color: var(--text-muted); font-weight: bold;">CRONÓMETRO DE BLOQUE TÉCNICO</p>
+                    <div class="timer-display" id="reloj-display">--:--</div>
+                    <div class="timer-btns">
+                        <button onclick="iniciarReloj(${cl.cronometroSegs})">▶ Iniciar Bloque</button>
+                        <button class="reset" onclick="resetearReloj(${cl.cronometroSegs})">⏹ Reiniciar</button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('panel-clase').innerHTML = html;
+            resetearReloj(cl.cronometroSegs);
+        }
+
+        function iniciarReloj(segsTotales) {
+            clearInterval(temporizador);
+            let tiempoRestante = segsTotales;
+            actualizarDisplay(tiempoRestante);
+
+            temporizador = setInterval(() => {
+                if (tiempoRestante > 0) {
+                    tiempoRestante--;
+                    actualizarDisplay(tiempoRestante);
+                } else {
+                    clearInterval(temporizador);
+                    document.getElementById('reloj-display').textContent = "¡BLOQUE COMPLETADO!";
+                }
+            }, 1000);
+        }
+
+        function resetearReloj(segsTotales) {
+            clearInterval(temporizador);
+            actualizarDisplay(segsTotales);
+        }
+
+        function actualizarDisplay(segs) {
+            let m = Math.floor(segs / 60);
+            let s = segs % 60;
+            let mStr = m < 10 ? '0' + m : m;
+            let sStr = s < 10 ? '0' + s : s;
+            const disp = document.getElementById('reloj-display');
+            if(disp) disp.textContent = `${mStr}:${sStr}`;
         }
     </script>
 </body>
