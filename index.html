@@ -402,20 +402,31 @@
             const texto = input.value.trim();
             if(!texto) return;
 
+            // Obtener contexto visual actual de la interfaz del alumno
+            const mesSeleccionado = document.getElementById('select-mes').value;
+            const selectDia = document.getElementById('select-dia');
+            const claseTexto = selectDia.options[selectDia.selectedIndex].text;
+            const apuntesActuales = document.getElementById('apuntes-alumno').value;
+
             const chatBox = document.getElementById('chat-mensajes');
             chatBox.innerHTML += `<div class="msg alumno">${texto}</div>`;
             input.value = '';
             chatBox.scrollTop = chatBox.scrollHeight;
 
             const idTemp = "temp-" + Date.now();
-            chatBox.innerHTML += `<div class="msg profesora" id="${idTemp}">👩‍🏫 Analizando tu consulta desde la perspectiva de entrenadora vocal...</div>`;
+            chatBox.innerHTML += `<div class="msg profesora" id="${idTemp}">👩‍🏫 Analizando tu avance y preparando la retroalimentación vocal...</div>`;
             chatBox.scrollTop = chatBox.scrollHeight;
 
             try {
                 const res = await fetch('/api/profesora', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ mensaje: texto, claseActual: "Programa Intensivo Canto Forever" })
+                    body: JSON.stringify({ 
+                        mensaje: texto, 
+                        mesActual: mesSeleccionado,
+                        claseActual: claseTexto,
+                        apuntesAlumno: apuntesActuales
+                    })
                 });
                 const data = await res.json();
                 
@@ -423,7 +434,7 @@
                 chatBox.innerHTML += `<div class="msg profesora">${data.respuesta}</div>`;
             } catch (err) {
                 document.getElementById(idTemp).remove();
-                chatBox.innerHTML += `<div class="msg profesora">⚠️ Revisa tu conexión. Recuerda que si experimentas dolor o molestias al cantar, debes detenerte de inmediato.</div>`;
+                chatBox.innerHTML += `<div class="msg profesora">⚠️ Ocurrió un error al procesar tu consulta. Si sientes dolor o molestias en la garganta, detén la práctica de inmediato.</div>`;
             }
             chatBox.scrollTop = chatBox.scrollHeight;
         }
