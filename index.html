@@ -3,157 +3,435 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plataforma de Canto - Módulos</title>
+    <title>Canto Forever - Presentación Interactiva y Audio Guía</title>
     <style>
-        /* Estilos generales de la página */
+        :root {
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --accent-blue: #0284c7;
+            --accent-dark: #0f172a;
+            --accent-gold: #d97706;
+            --accent-green: #10b981;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+        }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
             margin: 0;
             padding: 20px;
-            background-color: #f4f4f9;
-        }
-
-        /* --- ESTILOS DEL GUÍA VIRTUAL --- */
-        /* Botón flotante */
-        #btn-guia {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #2c3e50;
-            color: white;
-            border: none;
-            border-radius: 50px;
-            padding: 15px 25px;
-            font-size: 16px;
-            cursor: pointer;
-            box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
-            transition: 0.3s;
-        }
-        #btn-guia:hover {
-            background-color: #1a252f;
-        }
-
-        /* Ventana del chat/guía */
-        #ventana-guia {
-            display: none; /* Oculto por defecto */
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            width: 320px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
-            overflow: hidden;
             display: flex;
             flex-direction: column;
+            align-items: center;
         }
-
-        /* Cabecera de la ventana */
-        .guia-header {
-            background-color: #2c3e50;
-            color: white;
-            padding: 15px;
+        .container {
+            width: 100%;
+            max-width: 1000px;
+        }
+        header {
             text-align: center;
-            font-weight: bold;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 15px;
         }
-
-        /* Área de mensajes */
-        .guia-mensajes {
-            height: 250px;
-            padding: 15px;
-            overflow-y: auto;
-            background-color: #fafafa;
+        header h1 {
+            color: var(--accent-dark);
+            margin: 0;
+            font-size: 2.4rem;
         }
-        
-        /* Mensaje inicial del guía */
-        .mensaje-bot {
-            background-color: #e0e0e0;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            font-size: 14px;
-            color: #333;
+        header p {
+            color: var(--accent-blue);
+            margin: 5px 0 0 0;
+            font-weight: 600;
         }
-
-        /* Área para escribir */
-        .guia-input {
+        .card {
+            background-color: var(--bg-card);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+            border: 1px solid var(--border);
+        }
+        .section-title {
+            color: var(--accent-dark);
+            font-size: 1.25rem;
+            margin-top: 0;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 10px;
+        }
+        .selector-row {
             display: flex;
-            border-top: 1px solid #ccc;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
         }
-        .guia-input input {
+        .selector-group {
             flex: 1;
-            padding: 12px;
+            min-width: 250px;
+        }
+        label {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+        select {
+            width: 100%;
+            background: #f1f5f9;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+            cursor: pointer;
+        }
+        .start-btn {
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            color: white;
             border: none;
+            padding: 16px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(2,132,199,0.3);
+        }
+        .start-btn:hover {
+            opacity: 0.95;
+        }
+        .slide-deck {
+            background: #ffffff;
+            border: 2px solid var(--border);
+        }
+        .accordion-header {
+            background: #f1f5f9;
+            color: var(--accent-dark);
+            font-size: 1.15rem;
+            font-weight: bold;
+            padding: 18px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--border);
+            transition: all 0.2s ease;
+        }
+        .accordion-header:hover {
+            background: #e2e8f0;
+            color: var(--accent-blue);
+        }
+        .accordion-content {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .accordion-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .slide-text {
+            color: var(--text-main);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            white-space: pre-line;
+        }
+        /* Estilos específicos para darle vida al texto del Guía */
+        .guia-habla {
+            background-color: #f0fdf4;
+            border-left: 5px solid var(--accent-green);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+        }
+        .audio-box {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .audio-box button {
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .chat-box {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 15px;
+            height: 180px;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+            margin-bottom: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .msg {
+            padding: 12px 15px;
+            border-radius: 10px;
+            max-width: 85%;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+        .msg.profesora {
+            background: #e0f2fe;
+            color: #0369a1;
+            align-self: flex-start;
+            border: 1px solid #bae6fd;
+        }
+        .msg.alumno {
+            background: #0284c7;
+            color: #fff;
+            align-self: flex-end;
+        }
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+        }
+        .chat-input-area input {
+            flex: 1;
+            background: #f1f5f9;
+            border: 1px solid var(--border);
+            padding: 12px;
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 1rem;
             outline: none;
         }
-        .guia-input button {
-            background-color: #2c3e50;
+        .chat-input-area button {
+            background: var(--accent-dark);
             color: white;
             border: none;
-            padding: 0 15px;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
             cursor: pointer;
         }
     </style>
 </head>
 <body>
 
-    <!-- Contenido principal de tu página -->
-    <h1>Bienvenido a tu entrenamiento</h1>
-    <p>Aquí irá el contenido de tus módulos de 2 horas...</p>
+    <div class="container">
+        <header>
+            <h1>Canto Forever</h1>
+            <p>🎓 Presentación Interactiva Paso a Paso y Audio Guía IA</p>
+        </header>
 
-    <!-- ========================================== -->
-    <!-- CÓDIGO DEL WIDGET DEL GUÍA VIRTUAL           -->
-    <!-- ========================================== -->
-    
-    <!-- Botón para abrir el guía -->
-    <button id="btn-guia" onclick="toggleGuia()">🎤 Habla con tu Guía</button>
-
-    <!-- Ventana del Guía -->
-    <div id="ventana-guia" style="display: none;">
-        <div class="guia-header">
-            Tu Guía Vocal IA
-        </div>
-        <div class="guia-mensajes" id="chat-box">
-            <!-- Aquí puedes poner el guion inicial que armemos -->
-            <div class="mensaje-bot">
-                ¡Hola! Soy tu asistente de entrenamiento. ¿En qué parte de tu técnica vocal o módulo te puedo ayudar hoy?
+        <div class="card">
+            <h2 class="section-title">📅 Selecciona tu Plan de Estudios</h2>
+            <div class="selector-row">
+                <div class="selector-group">
+                    <label for="select-mes">Módulo:</label>
+                    <select id="select-mes">
+                        <option value="mes1">Mes 1: Fundamentos y Respiración (Resistencia)</option>
+                        <option value="mes2">Mes 2: Falsete y Voces Agudas</option>
+                        <option value="mes3">Mes 3: Resonancia y Estilo</option>
+                    </select>
+                </div>
+                <div class="selector-group">
+                    <label for="select-dia">Clase del Día:</label>
+                    <select id="select-dia">
+                        <option value="dia1">Día 1: Preparando el Motor (Rutina 2 Horas)</option>
+                        <option value="dia2">Día 2: Control del Fuelle Abdominal</option>
+                        <option value="dia3">Día 3: Zumbidos y Resonancia Frontal</option>
+                        <option value="dia4">Día 4: Eliminación de Tensión Laríngea</option>
+                        <option value="dia5">Día 5: Circuito Práctico de Consolidación</option>
+                    </select>
+                </div>
             </div>
+            <button class="start-btn" onclick="cargarClaseInteractiva()">▶ Iniciar Sesión de 2 Horas</button>
         </div>
-        <div class="guia-input">
-            <input type="text" id="user-input" placeholder="Escribe tu duda aquí...">
-            <button onclick="enviarMensaje()">Enviar</button>
+
+        <div class="card slide-deck" id="pantalla-ppt">
+            <h2 style="color: var(--accent-dark); margin-top:0;">Bienvenido a tu Aula Interactiva</h2>
+            <p style="color: var(--text-muted);">Selecciona tu clase arriba y haz clic en "Iniciar Sesión". Preparate, porque hoy sudamos la camiseta.</p>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">👩‍🏫 Profesora IA en Directo</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 12px;">Consulta tus dudas en tiempo real mientras entrenas:</p>
+            <div class="chat-box" id="chat-mensajes">
+                <div class="msg profesora">¡Hola! Soy tu Guía IA. Abre la presentación y dime si sientes alguna molestia en la garganta al hacer los ejercicios. ¡Estoy aquí para corregirte!</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="input-pregunta" placeholder="Ej: Me cuesta mantener el aire 30 segundos..." onkeypress="if(event.key === 'Enter') enviarPregunta()">
+                <button onclick="enviarPregunta()">Consultar</button>
+            </div>
         </div>
     </div>
 
-    <!-- Script para darle interactividad al widget -->
     <script>
-        // Función para abrir/cerrar la ventana
-        function toggleGuia() {
-            var ventana = document.getElementById("ventana-guia");
-            if (ventana.style.display === "none") {
-                ventana.style.display = "flex";
+        const baseClasesPPT = {
+            mes1: {
+                dia1: {
+                    titulo: "Día 1: El Motor del Ritmo - Anatomía del Aire (Duración: 2 Horas)",
+                    b1Titulo: "⏱️ Bloque 1 (30 min): Alineación y Calentamiento Físico",
+                    b1Texto: `<div class="guia-habla">"🎙️ ¡Vamos a la acción! Deja todo lo que estés haciendo. Si quieres aguantar un show completo sin que tu voz muera en la tercera canción, el cuerpo debe estar suelto. El 90% de los cantantes se quedan sin aire porque cantan con los hombros tensos. ¡Hoy cambiamos eso!"</div>
+                    **Paso a Paso Contigo:**
+                    1. **Postura de Poder:** Ponte de pie frente al espejo. Separa las piernas a la anchura de tus hombros. Suelta los brazos. 
+                    2. **Estiramiento Cervical (10 min):** Haz círculos lentos con el cuello. 5 hacia la derecha, 5 hacia la izquierda. Si escuchas que algo "cruje", hazlo más suave. La laringe necesita espacio libre.
+                    3. **Desbloqueo de Mandíbula (10 min):** Masajea con la yema de tus dedos la unión de tu mandíbula (justo debajo de las orejas). Abre la boca como si fueras a bostezar y déjala caer. Cero tensión.
+                    4. **Conexión Abdominal (10 min):** Pon tus manos en tus costillas flotantes. Inhala lentamente por la nariz. ¿Sentiste cómo se expanden tus manos hacia los lados? Si tu pecho se infló hacia arriba, expulsa el aire y vuelve a intentarlo. El motor está abajo, no arriba.`,
+                    
+                    b2Titulo: "⏱️ Bloque 2 (45 min): Gimnasio Diafragmático - Siseo de Precisión",
+                    b2Texto: `<div class="guia-habla">"🎙️ Ya tenemos el cuerpo listo. Ahora vamos a entrenar el diafragma como si fuera un músculo de gimnasio. Este es el secreto para que los finales de tus frases no suenen ahogados."</div>
+                    **Circuito de Resistencia:**
+                    • **El Reto de los 20 Segundos:** Toma aire expandiendo las costillas (como vimos en el bloque 1). Ahora, vas a soltar el aire haciendo una 'ssss' (como una serpiente) súper constante. Usa el cronómetro de tu teléfono. Quiero que llegues a 20 segundos sin que el sonido tiemble. 
+                    • **Series:** Haremos 10 repeticiones. Descansa 30 segundos entre cada una.
+                    • **Enfoque:** Pon una mano en tu ombligo. Debes sentir que tu pared abdominal está firme, sosteniendo la salida del aire como si fuera un freno de mano. ¡No empujes desde la garganta!`,
+                    tieneAudio1: false,
+                    
+                    b3Titulo: "⏱️ Bloque 3 (45 min): Práctica en Acción y Afinación",
+                    b3Texto: `<div class="guia-habla">"🎙️ ¡Último esfuerzo! Ya tienes el control del aire, ahora vamos a ponerle sonido. Usa el botón verde de abajo para escuchar la nota y vamos a mantenerla usando la misma técnica de la 'ssss', pero ahora con la vocal 'U'."</div>
+                    **Aplicación Vocal:**
+                    1. **Tono Guía:** Reproduce el tono A4 en el botón de abajo.
+                    2. **Ataque Suave:** Inhala profundo (costillas a los lados) y emite un sonido "Uuu" suave, intentando imitar la nota exacta.
+                    3. **Dinámica de Sostén:** Mantén la nota durante 10 segundos continuos. Tu abdomen debe hacer todo el trabajo de fuerza; tu garganta solo está "abierta" dejando pasar el sonido.
+                    4. **Cierre de Clase:** Haz 15 repeticiones de este ejercicio. Si sientes picazón o ganas de toser, detente, toma agua a temperatura ambiente y relaja. 
+                    
+                    ¡Excelente trabajo hoy! Tu motor ya está empezando a entender de dónde viene la fuerza real.`,
+                    tieneAudio3: true // Muestra el botón de audio al final
+                },
+                dia2: {
+                    titulo: "Día 2: Control del Fuelle Abdominal (Duración: 2 Horas)",
+                    b1Titulo: "⏱️ Bloque 1 (30 min): Despertar el Diafragma",
+                    b1Texto: `<div class="guia-habla">"🎙️ ¡Día 2! Hoy vamos a darle ritmo a ese control de aire. Si vas a cantar temas movidos, necesitas ataques vocales limpios."</div>\n\n• Haz tu rutina de estiramiento del Día 1.\n• Repasa 5 series del siseo constante para calentar motores.`,
+                    b2Titulo: "⏱️ Bloque 2 (45 min): Rebotes Abdominales",
+                    b2Texto: `<div class="guia-habla">"🎙️ Vamos a simular el pistón de un motor."</div>\n\n• Pon tus manos en el estómago. Emite sonidos cortos y rítmicos: 'tss-tss-tss'. \n• Siente cómo tu estómago "salta" hacia adentro con cada sonido. Haz 4 series de 30 rebotes rítmicos.`,
+                    b3Titulo: "⏱️ Bloque 3 (45 min): Consolidación Rítmica",
+                    b3Texto: "• Lleva el ejercicio del 'tss' a un patrón de ritmo rápido. \n• Luego, cambia el 'tss' por notas cortas usando la sílaba 'Ja-Ja-Ja'. Si pica la garganta, estás empujando mal.",
+                },
+                // Los demás días mantienen una estructura similar, los dejé resumidos por espacio en la respuesta.
+                dia3: { titulo: "Día 3: Resonancia Frontal", b1Titulo: "Teoría", b1Texto: "Texto en desarrollo...", b2Titulo: "Práctica", b2Texto: "Práctica...", b3Titulo: "Evaluación", b3Texto: "Evaluación..." },
+                dia4: { titulo: "Día 4: Tensión Laríngea", b1Titulo: "Teoría", b1Texto: "Texto en desarrollo...", b2Titulo: "Práctica", b2Texto: "Práctica...", b3Titulo: "Evaluación", b3Texto: "Evaluación..." },
+                dia5: { titulo: "Día 5: Circuito Práctico", b1Titulo: "Teoría", b1Texto: "Texto en desarrollo...", b2Titulo: "Práctica", b2Texto: "Práctica...", b3Titulo: "Evaluación", b3Texto: "Evaluación..." }
+            },
+            mes2: { dia1: { titulo: "Mes 2 - Falsete", b1Titulo: "Teoría", b1Texto: "Texto en desarrollo...", b2Titulo: "Práctica", b2Texto: "Práctica...", b3Titulo: "Evaluación", b3Texto: "Evaluación..." } },
+            mes3: { dia1: { titulo: "Mes 3 - Estilo", b1Titulo: "Teoría", b1Texto: "Texto en desarrollo...", b2Titulo: "Práctica", b2Texto: "Práctica...", b3Titulo: "Evaluación", b3Texto: "Evaluación..." } }
+        };
+
+        function cargarClaseInteractiva() {
+            const mes = document.getElementById('select-mes').value;
+            // Para el ejemplo, forzaremos dia1 o dia2 si están disponibles
+            const selectDia = document.getElementById('select-dia').value;
+            const clase = baseClasesPPT[mes][selectDia] || baseClasesPPT['mes1']['dia1']; 
+
+            let html = `
+                <h2 style="color: var(--accent-dark); margin-top:0;">${clase.titulo}</h2>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Haz clic en cada título para abrir las instrucciones de tu Guía IA:</p>
+
+                <div class="accordion-header" onclick="toggleSlide('slide1')">
+                    <span>${clase.b1Titulo}</span> <span>▼</span>
+                </div>
+                <div class="accordion-content active" id="slide1">
+                    <div class="slide-text">${clase.b1Texto}</div>
+                </div>
+
+                <div class="accordion-header" onclick="toggleSlide('slide2')">
+                    <span>${clase.b2Titulo}</span> <span>▼</span>
+                </div>
+                <div class="accordion-content" id="slide2">
+                    <div class="slide-text">${clase.b2Texto}</div>
+                </div>
+
+                <div class="accordion-header" onclick="toggleSlide('slide3')">
+                    <span>${clase.b3Titulo}</span> <span>▼</span>
+                </div>
+                <div class="accordion-content" id="slide3">
+                    <div class="slide-text">${clase.b3Texto}</div>
+                    ${clase.tieneAudio3 ? `
+                        <div class="audio-box">
+                            <span>🔊 Tono para afinación y sostén:</span>
+                            <button onclick="reproducirTonoGuia(440)">Reproducir Tono A4 (440Hz)</button>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+
+            document.getElementById('pantalla-ppt').innerHTML = html;
+        }
+
+        function toggleSlide(id) {
+            const el = document.getElementById(id);
+            if (el.classList.contains('active')) {
+                el.classList.remove('active');
             } else {
-                ventana.style.display = "none";
+                document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('active'));
+                el.classList.add('active');
             }
         }
 
-        // Función básica para mostrar lo que escribe el alumno
-        function enviarMensaje() {
-            var input = document.getElementById("user-input");
-            var mensaje = input.value;
-            
-            if(mensaje.trim() !== "") {
-                var chatBox = document.getElementById("chat-box");
+        function reproducirTonoGuia(frecuencia) {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
                 
-                // Mostrar el mensaje del usuario
-                chatBox.innerHTML += `<div class="mensaje-bot" style="background-color: #d1ecf1; text-align: right;">${mensaje}</div>`;
+                osc.type = 'sine';
+                osc.frequency.value = frecuencia; 
                 
-                // Limpiar la barra de texto
-                input.value = "";
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 3); 
                 
-                // Auto-scroll hacia abajo
-                chatBox.scrollTop = chatBox.scrollHeight;
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 3);
+            } catch(e) {
+                alert("Haz clic en la página primero para habilitar el audio.");
             }
+        }
+
+        function enviarPregunta() {
+            const input = document.getElementById('input-pregunta');
+            const texto = input.value.trim();
+            if(!texto) return;
+
+            const chatBox = document.getElementById('chat-mensajes');
+            chatBox.innerHTML += `<div class="msg alumno">${texto}</div>`;
+            input.value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            setTimeout(() => {
+                let respuesta = "¡Bien hecho! Sigue las instrucciones del Bloque activo. Si necesitas la nota de apoyo, recuerda usar el generador de tonos.";
+                
+                const t = texto.toLowerCase();
+                if(t.includes('dolor') || t.includes('garganta') || t.includes('pica')) {
+                    respuesta = "⚠️ ¡Alto ahí! Si te duele o pica, estás apretando el cuello. Respira, toma agua, relaja los hombros y vuelve al Bloque 1. El esfuerzo debe estar en el abdomen, nunca arriba.";
+                } else if(t.includes('agudo') || t.includes('falsete')) {
+                    respuesta = "🎵 No empujes los agudos. Aligera el flujo de aire y piensa que el sonido va hacia tus pómulos, no hacia tu garganta.";
+                } else if(t.includes('aire') || t.includes('siseo') || t.includes('segundos')) {
+                    respuesta = "🌬️ No te desesperes si no llegas a los 20 segundos hoy. Lo importante es que el flujo de aire sea constante, sin temblar. Ajusta la tensión del abdomen.";
+                }
+
+                chatBox.innerHTML += `<div class="msg profesora">${respuesta}</div>`;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 600);
         }
     </script>
 </body>
