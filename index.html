@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canto Forever — Tu Profesora de Canto Personal con IA</title>
+    <title>Canto Forever — Programa Intensivo de Formación Vocal con IA</title>
     <style>
         :root {
             --bg-main: #f8fafc;
@@ -62,6 +62,7 @@
             padding: 25px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             border: 1px solid var(--border);
+            margin-bottom: 25px;
         }
         .section-title {
             color: var(--dark);
@@ -81,7 +82,7 @@
         .progress-bar {
             background: linear-gradient(135deg, var(--primary), var(--accent-purple));
             height: 100%;
-            width: 5%; /* Progreso inicial Clase 1 */
+            width: 1.6%;
             border-radius: 10px;
         }
         .selector-row {
@@ -92,7 +93,7 @@
         }
         .selector-group {
             flex: 1;
-            min-width: 200px;
+            min-width: 220px;
         }
         label {
             display: block;
@@ -152,8 +153,9 @@
             border-radius: 6px;
             font-weight: bold;
             cursor: pointer;
+            width: auto;
         }
-        /* Chat Profesora IA */
+        /* Chat de la Profesora IA */
         .chat-box {
             background: #f8fafc;
             border-radius: 10px;
@@ -196,109 +198,110 @@
     <div class="container">
         <header>
             <h1>🎤 CANTO FOREVER</h1>
-            <p>Tu voz. Tu proceso. Tu mejor versión.</p>
+            <p>Programa Intensivo de Formación Vocal · 3 Meses · 60 Clases · 2 Horas Diarias</p>
         </header>
 
         <!-- Dashboard General -->
         <div class="dashboard-grid">
-            <div class="card">
-                <h3 class="section-title">📊 Tu Progreso Actual</h3>
-                <p><strong>Módulo:</strong> Mes 1 — Fundamentos</p>
-                <p><strong>Clase Activa:</strong> Día 1 (2 Horas)</p>
+            <div class="card" style="margin-bottom: 0;">
+                <h3 class="section-title">📊 Tu Progreso en el Programa</h3>
+                <p><strong>Etapa Actual:</strong> Mes 1 — Construye tu Instrumento</p>
+                <p><strong>Clase Activa:</strong> Día 1 (2 Horas de Duración)</p>
                 <div class="progress-bar-container">
                     <div class="progress-bar" id="barra-progreso"></div>
                 </div>
-                <small style="color: var(--text-muted);">Clase 1 de 60 completada (Progreso: 1.6%)</small>
+                <small style="color: var(--text-muted);">Clase 1 de 60 completadas (1.6% del programa total)</small>
             </div>
-            <div class="card">
+            <div class="card" style="margin-bottom: 0;">
                 <h3 class="section-title">🎯 Estadísticas Generales</h3>
                 <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: var(--text-muted);">
                     <li>🎓 Clases Estudiadas: <strong style="color: var(--dark);">1 / 60</strong></li>
                     <li>⏱️ Horas de Práctica: <strong style="color: var(--dark);">2 hrs</strong></li>
-                    <li>🎵 Ejercicios Interactivos: <strong style="color: var(--dark);">Active</strong></li>
-                    <li>⭐ Constancia: <strong style="color: var(--success);">100%</strong></li>
+                    <li>🎵 Biblioteca de Ejercicios: <strong style="color: var(--dark);">Activa</strong></li>
+                    <li>⭐ Constancia Semanal: <strong style="color: var(--success);">100%</strong></li>
                 </ul>
             </div>
         </div>
 
-        <!-- Selector del Programa de 3 Meses -->
+        <!-- Selector del Programa Intensivo de 3 Meses -->
         <div class="card">
-            <h2 class="section-title">📅 Plan de Estudios (60 Clases Interactivas)</h2>
+            <h2 class="section-title">📅 Plan de Estudios Exhaustivo (60 Clases)</h2>
             <div class="selector-row">
                 <div class="selector-group">
-                    <label for="select-mes">Selecciona el Mes:</label>
-                    <select id="select-mes">
-                        <option value="mes1">Mes 1: Fundamentos y Construcción Base</option>
-                        <option value="mes2">Mes 2: Desarrollo Vocal y Registros</option>
-                        <option value="mes3">Mes 3: Interpretación y Repertorio Cantado</option>
+                    <label for="select-mes">Etapa / Mes:</label>
+                    <select id="select-mes" onchange="actualizarDias()">
+                        <option value="mes1">Mes 1: Construye tu Instrumento (Fundamentos)</option>
+                        <option value="mes2">Mes 2: Desarrolla tu Voz (Técnica y Registros)</option>
+                        <option value="mes3">Mes 3: Conviértete en Cantante (Repertorio e Interpretación)</option>
                     </select>
                 </div>
                 <div class="selector-group">
-                    <label for="select-dia">Selecciona la Clase del Día:</label>
+                    <label for="select-dia">Clase del Día:</label>
                     <select id="select-dia">
-                        <option value="dia1">Día 1: Comenzamos tu camino vocal (Duración: 2 Horas)</option>
-                        <option value="dia2">Día 2: Postura y Relajación Corporal</option>
-                        <option value="dia3">Día 3: El Fuelle Respiratorio y Apoyo</option>
-                        <option value="dia4">Día 4: Zumbidos y Colocación Inicial</option>
-                        <option value="dia5">Día 5: Consolidación y Primera Autoevaluación</option>
+                        <option value="dia1">Día 1: ¿Qué es la voz y cómo funciona? Postura y Respiración</option>
+                        <option value="dia2">Día 2: Alineación corporal, relajación de mandíbula y cuello</option>
+                        <option value="dia3">Día 3: El fuelle respiratorio y control del aire abdominal</option>
+                        <option value="dia4">Día 4: Zumbidos iniciales y colocación en la máscara</option>
+                        <option value="dia5">Día 5: Consolidación, ritmo básico y primera autoevaluación</option>
                     </select>
                 </div>
             </div>
-            <button class="btn" onclick="cargarClaseInteractiva()">▶ Cargar Clase Guiada de 2 Horas</button>
+            <button class="btn" onclick="cargarClaseIntensiva()">▶ Iniciar Clase Guiada de 2 Horas</button>
         </div>
 
-        <!-- Contenido de la Clase Activa (Estructura de Bloques) -->
+        <!-- Contenido de la Clase Activa (Estructura de Bloques Completa) -->
         <div class="card" id="pantalla-clase">
-            <h2 style="color: var(--dark); margin-top:0;">MES 1 — DÍA 1: Comenzamos tu camino vocal</h2>
-            <p style="color: var(--text-muted); margin-bottom: 20px;">Bienvenido a tu primera clase de Canto Forever. Hoy vamos a comenzar desde cero. Yo seré tu profesora durante estas dos horas[cite: 7].</p>
+            <h2 style="color: var(--dark); margin-top:0;">MES 1 — DÍA 1: ¿Qué es la voz y cómo funciona? Postura y Respiración</h2>
+            <p style="color: var(--text-muted); margin-bottom: 20px;">Bienvenido a tu programa intensivo. Durante estas 2 horas de clase te guiaré paso a paso combinando teoría profunda, práctica y evaluación continua.</p>
 
             <div class="bloque-clase">
-                <h4>⏱️ Bloque 1 & 2 (15 min) — Bienvenida y Repaso</h4>
-                <p>La profesora evalúa tu estado físico inicial, revisa tensiones y alinea tus expectativas para el entrenamiento de hoy[cite: 7].</p>
+                <h4>⏱️ Bloque 1 & 2 (15 min) — Bienvenida, Revisión de Estado y Diálogo</h4>
+                <p>La profesora IA evalúa cómo te sientes, revisa tu postura inicial y alinea tus expectativas para el entrenamiento de hoy.</p>
             </div>
 
             <div class="bloque-clase">
-                <h4>⏱️ Bloque 3 & 4 (45 min) — Teoría y Demostración Auditiva</h4>
-                <p><strong>¿Qué es la voz y cómo se produce?</strong> Las cuerdas vocales vibran gracias al flujo de aire controlado por el diafragma[cite: 7]. Explicación visual y sencilla del aparato fonador.</p>
+                <h4>⏱️ Bloque 3 & 4 (45 min) — Teoría Progresiva y Demostración Auditiva</h4>
+                <p><strong>¿Qué es y cómo se produce?</strong> Las cuerdas vocales ubicadas en la laringe vibran gracias a la presión del aire subglótico regulado por el diafragma y la faja abdominal.<br>
+                <em>Errores comunes:</em> Levantar los hombros al respirar o tensar la garganta al emitir sonido.</p>
                 <div class="audio-box">
-                    <span>🔊 Escucha la nota base de referencia antes de empezar:</span>
-                    <button onclick="reproducirTonoGuia(440)">Reproducir Nota A4</button>
+                    <span>🔊 Escucha la nota base de referencia antes de empezar los ejercicios:</span>
+                    <button onclick="reproducirTonoGuia(440)">Reproducer Nota A4 (440Hz)</button>
                 </div>
             </div>
 
             <div class="bloque-clase">
-                <h4>⏱️ Bloque 5 al 9 (45 min) — Práctica Vocal y Entrenamiento Auditivo</h4>
-                <p>• Ejercicio de respiración costo-diafragmática (5 series de 20 segundos)[cite: 7].<br>
-                • Calentamiento con zumbido "MMM" y control de ritmo con metrónomo guiado[cite: 7].</p>
+                <h4>⏱️ Bloque 5 al 9 (45 min) — Práctica Vocal, Técnica e Interacción</h4>
+                <p>• <strong>Respiración:</strong> Inhalación nasal profunda en 4 tiempos expandiendo costillas flotantes sin mover el pecho.<br>
+                • <strong>Calentamiento:</strong> Ejercicios de siseo continuo ("SSSS") y zumbidos ("MMM") para despertar la resonancia.</p>
             </div>
 
             <div class="bloque-clase">
-                <h4>⏱️ Bloque 10 al 13 (15 min) — Aplicación, Autoevaluación y Tarea</h4>
-                <p>Califica tu esfuerzo de hoy y guarda tus apuntes en tu cuaderno personal para que la IA adapte la siguiente clase[cite: 7].</p>
+                <h4>⏱️ Bloque 10 al 13 (15 min) — Aplicación, Autoevaluación y Tarea Asignada</h4>
+                <p>Califica tu esfuerzo, registra tus sensaciones en el cuaderno y recibe tu tarea para consolidar el hábito vocal.</p>
             </div>
         </div>
 
-        <!-- Cuaderno del Alumno (Diario de Canto) -->
+        <!-- Cuaderno del Alumno (Bitácora Personal) -->
         <div class="card">
-            <h2 class="section-title">📓 Mi Cuaderno de Canto — Apuntes del Día[cite: 7]</h2>
+            <h2 class="section-title">📓 Mi Cuaderno de Canto — Apuntes y Bitácora</h2>
             <div style="display: grid; gap: 15px;">
                 <div>
-                    <label>¿Qué aprendiste hoy y qué sensaciones tuviste en tu voz?</label>
-                    <textarea id="apuntes-alumno" rows="3" placeholder="Escribe aquí tus reflexiones..."></textarea>
+                    <label>¿Qué descubriste hoy sobre tu voz y qué dificultades encontraste?</label>
+                    <textarea id="apuntes-alumno" rows="3" placeholder="Escribe tus apuntes, dudas o sensaciones de la clase..."></textarea>
                 </div>
-                <button class="btn" style="background: var(--accent-teal);" onclick="guardarApuntes()">Guardar en mi Bitácora</button>
+                <button class="btn" style="background: var(--accent-teal);" onclick="guardarApuntes()">Guardar en mi Bitácora Personal</button>
             </div>
         </div>
 
-        <!-- Profesora IA en Directo (Conexión Gemini) -->
+        <!-- Profesora IA en Directo (Conexión Gemini en el Servidor) -->
         <div class="card">
-            <h2 class="section-title">👩‍🏫 Pregúntale a tu Profesora IA[cite: 7]</h2>
-            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 12px;">Conversa en tiempo real con tu profesora sobre dudas de la clase, técnica o apoyo vocal[cite: 7]:</p>
+            <h2 class="section-title">👩‍🏫 Pregúntale a tu Profesora IA</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 12px;">Conversa en tiempo real con tu profesora sobre técnica, teoría, corrección de errores o dudas de la clase:</p>
             <div class="chat-box" id="chat-mensajes">
-                <div class="msg profesora">¡Hola! Soy tu profesora de Canto Forever. Durante los próximos tres meses vamos a trabajar juntos para desarrollar tu voz[cite: 7]. ¿Cómo te sentiste con el ejercicio de respiración de hoy?</div>
+                <div class="msg profesora">¡Hola! Soy tu profesora de Canto Forever. Comencemos este programa intensivo de 3 meses. ¿Tienes alguna duda sobre la postura o la respiración de la clase de hoy?</div>
             </div>
             <div class="chat-input-area">
-                <input type="text" id="input-pregunta" placeholder="Ej: Profesora, ¿por qué siento tensión en el cuello al hacer el zumbido?" onkeypress="if(event.key === 'Enter') enviarPreguntaIA()">
+                <input type="text" id="input-pregunta" placeholder="Ej: Profesora, ¿cómo sé si estoy usando bien el diafragma?" onkeypress="if(event.key === 'Enter') enviarPreguntaIA()">
                 <button class="btn" onclick="enviarPreguntaIA()">Consultar</button>
             </div>
         </div>
@@ -328,37 +331,69 @@
             }
         }
 
-        function cargarClaseInteractiva() {
+        function actualizarDias() {
             const mes = document.getElementById('select-mes').value;
-            const dia = document.getElementById('select-dia').value;
+            const selectDia = document.getElementById('select-dia');
+            selectDia.innerHTML = "";
+
+            if(mes === 'mes1') {
+                selectDia.innerHTML = `
+                    <option value="dia1">Día 1: ¿Qué es la voz y cómo funciona? Postura y Respiración</option>
+                    <option value="dia2">Día 2: Alineación corporal, relajación de mandíbula y cuello</option>
+                    <option value="dia3">Día 3: El fuelle respiratorio y control del aire abdominal</option>
+                    <option value="dia4">Día 4: Zumbidos iniciales y colocación en la máscara</option>
+                    <option value="dia5">Día 5: Consolidación, ritmo básico y primera autoevaluación</option>
+                `;
+            } else if(mes === 'mes2') {
+                selectDia.innerHTML = `
+                    <option value="dia1">Día 1: Introducción a los registros vocales (Pecho y Cabeza)</option>
+                    <option value="dia2">Día 2: El puente vocal y la transición de registros</option>
+                    <option value="dia3">Día 3: Desarrollo de la voz mixta y flexibilidad</option>
+                    <option value="dia4">Día 4: Proyección, dinámica y control de volumen</option>
+                    <option value="dia5">Día 5: Evaluación técnica intermedia de registros</option>
+                `;
+            } else if(mes === 'mes3') {
+                selectDia.innerHTML = `
+                    <option value="dia1">Día 1: Interpretación, emoción y fraseo expresivo</option>
+                    <option value="dia2">Día 2: Análisis de repertorio y preparación de canciones</option>
+                    <option value="dia3">Día 3: Técnica de micrófono y control en vivo</option>
+                    <option value="dia4">Día 4: Grabación, autoevaluación y corrección de errores</option>
+                    <option value="dia5">Día 5: Examen final integral y certificación del programa</option>
+                `;
+            }
+        }
+
+        function cargarClaseIntensiva() {
+            const mes = document.getElementById('select-mes').value;
+            const selectDia = document.getElementById('select-dia');
+            const textoDia = selectDia.options[selectDia.selectedIndex].text;
             
-            // Simulación dinámica de la carga de clases del programa completo de 3 meses
             document.getElementById('pantalla-clase').innerHTML = `
-                <h2 style="color: var(--dark); margin-top:0;">${mes.toUpperCase()} — ${dia.toUpperCase()}</h2>
-                <p style="color: var(--text-muted); margin-bottom: 20px;">Clase cargada con éxito. Estructurada bajo el método pedagógico de 2 horas de duración[cite: 7].</p>
+                <h2 style="color: var(--dark); margin-top:0;">${mes.toUpperCase()} — ${textoDia}</h2>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Clase cargada con éxito. Estructurada bajo el programa intensivo de 2 horas de duración diaria.</p>
                 <div class="bloque-clase">
-                    <h4>⏱️ Bloque 1 a 4 — Teoría Progresiva y Demostración</h4>
-                    <p>Contenido adaptado al nivel del día. Enfoque riguroso en postura, colocación y salud vocal[cite: 7].</p>
+                    <h4>⏱️ Bloque 1 a 4 — Teoría Progresiva y Explicación Exhaustiva</h4>
+                    <p>Análisis detallado de conceptos, funcionamiento físico, errores comunes y demostración auditiva guiada.</p>
                 </div>
                 <div class="bloque-clase">
                     <h4>⏱️ Bloque 5 a 9 — Entrenamiento Práctico e Interactivo</h4>
-                    <p>Realiza los ejercicios de vocalización y entrena tu oído musical apoyándote en el generador de tonos[cite: 7].</p>
+                    <p>Ejercicios vocales específicos, entrenamiento auditivo y uso del generador de tonos de referencia.</p>
                 </div>
                 <div class="bloque-clase">
-                    <h4>⏱️ Bloque 10 a 13 — Autoevaluación y Tarea Asignada</h4>
-                    <p>Registra tus calificaciones para que el sistema inteligente ajuste la dificultad de la siguiente sesión[cite: 7].</p>
+                    <h4>⏱️ Bloque 10 a 13 — Autoevaluación, Bitácora y Tarea</h4>
+                    <p>Cierre de la sesión de 2 horas con registro de progresos para la adaptación inteligente del sistema.</p>
                 </div>
             `;
-            window.scrollTo({ top: 400, behavior: 'smooth' });
+            window.scrollTo({ top: 350, behavior: 'smooth' });
         }
 
         function guardarApuntes() {
             const texto = document.getElementById('apuntes-alumno').value;
             if(!texto.trim()) {
-                alert("Escribe algo en tus apuntes antes de guardar.");
+                alert("Escribe tus reflexiones en el cuaderno antes de guardar.");
                 return;
             }
-            alert("✅ Apuntes guardados correctamente en tu cuaderno de canto.");
+            alert("✅ Apuntes guardados con éxito en tu bitácora personal.");
             document.getElementById('apuntes-alumno').value = "";
         }
 
@@ -372,16 +407,15 @@
             input.value = '';
             chatBox.scrollTop = chatBox.scrollHeight;
 
-            // Indicador temporal de respuesta de la profesora
             const idTemp = "temp-" + Date.now();
-            chatBox.innerHTML += `<div class="msg profesora" id="${idTemp}">👩‍🏫 Pensando respuesta y revisando tu progreso vocal...</div>`;
+            chatBox.innerHTML += `<div class="msg profesora" id="${idTemp}">👩‍🏫 Analizando tu consulta desde la perspectiva de entrenadora vocal...</div>`;
             chatBox.scrollTop = chatBox.scrollHeight;
 
             try {
                 const res = await fetch('/api/profesora', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ mensaje: texto, claseActual: "Mes 1 - Día 1" })
+                    body: JSON.stringify({ mensaje: texto, claseActual: "Programa Intensivo Canto Forever" })
                 });
                 const data = await res.json();
                 
@@ -389,7 +423,7 @@
                 chatBox.innerHTML += `<div class="msg profesora">${data.respuesta}</div>`;
             } catch (err) {
                 document.getElementById(idTemp).remove();
-                chatBox.innerHTML += `<div class="msg profesora">⚠️ Revisa tu conexión. Recuerda que si sientes dolor o molestias al cantar, debes detenerte de inmediato[cite: 7].</div>`;
+                chatBox.innerHTML += `<div class="msg profesora">⚠️ Revisa tu conexión. Recuerda que si experimentas dolor o molestias al cantar, debes detenerte de inmediato.</div>`;
             }
             chatBox.scrollTop = chatBox.scrollHeight;
         }
