@@ -9,35 +9,34 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Inicializar Gemini de forma segura en el servidor
+// Inicializar Gemini de forma segura
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-// Endpoint seguro para conversar con la Profesora IA de Canto Forever
-app.api = app.post('/api/profesora', async (req, res) => {
+app.post('/api/profesora', async (req, res) => {
     try {
         const { mensaje, claseActual } = req.body;
 
-        const systemInstruction = `Eres la profesora de la plataforma de entrenamiento vocal "Canto Forever". 
-        Tu personalidad es paciente, motivadora, clara, profesional y positiva. 
-        Enseñas un programa de 3 meses de técnica vocal. 
-        Actualmente el alumno está en la ${claseActual || 'Clase Inicial'}. 
+        const systemInstruction = `Eres la profesora y coach vocal experta de la plataforma intensiva "Canto Forever". 
+        Tu programa abarca 3 meses (60 clases) llevando al alumno desde principiante hasta cantante con base vocal integral (técnica, respiración, postura, registros, resonancia, agudos, interpretación, repertorio, micrófono y teoría musical). 
+        Actualmente estás impartiendo la ${claseActual || 'Clase Inicial'}. 
+        Responde siempre con rigor pedagógico, explicando el qué, por qué, cómo, errores comunes y ejercicios prácticos. 
         Si el alumno indica dolor o molestias al cantar, ordénale detenerse de inmediato y recuérdale cuidar su salud vocal. 
-        Guía al alumno paso a paso, hazle preguntas y corrige sus errores de forma constructiva.`;
+        Sé paciente, motivadora, clara y profesional.`;
 
         const response = await ai.models.generateContent({
             model: 'gemini-2.5-flash',
             contents: [
-                { role: 'user', parts: [{ text: systemInstruction + "\n\nMensaje del alumno: " + mensaje }] }
+                { role: 'user', parts: [{ text: systemInstruction + "\n\nConsulta del alumno: " + mensaje }] }
             ]
         });
 
         res.json({ respuesta: response.text() });
     } catch (error) {
         console.error("Error al conectar con Gemini:", error);
-        res.status(500).json({ respuesta: "Lo siento, tuve un pequeño problema técnico procesando tu duda, pero recuerda mantener la postura y respirar desde el diafragma." });
+        res.status(500).json({ respuesta: "Lo siento, tuve un pequeño problema técnico procesando tu consulta, pero recuerda mantener la postura y respirar desde el diafragma." });
     }
 });
 
 app.listen(port, () => {
-    console.log(`🎤 Canto Forever corriendo en el puerto ${port}`);
+    console.log(`🎤 Canto Forever - Programa Intensivo corriendo en el puerto ${port}`);
 });
