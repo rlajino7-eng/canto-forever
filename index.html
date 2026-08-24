@@ -3,21 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canto Forever — Programa Intensivo de Formación Vocal con IA</title>
+    <title>Canto Forever — Plataforma Integral</title>
     <style>
         :root {
             --bg-main: #f8fafc;
             --bg-card: #ffffff;
             --primary: #0284c7;
             --primary-dark: #0369a1;
-            --dark: #0f172a;
             --accent-purple: #7c3aed;
             --accent-teal: #0d9488;
             --text-main: #1e293b;
             --text-muted: #64748b;
             --border: #e2e8f0;
             --success: #10b981;
-            --warning: #f59e0b;
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -35,12 +33,11 @@
         }
         header {
             text-align: center;
-            margin-bottom: 25px;
-            border-bottom: 2px solid var(--border);
+            margin-bottom: 20px;
             padding-bottom: 15px;
         }
         header h1 {
-            color: var(--dark);
+            color: var(--text-main);
             margin: 0;
             font-size: 2.5rem;
         }
@@ -48,42 +45,63 @@
             color: var(--primary);
             margin: 5px 0 0 0;
             font-weight: 600;
-            font-size: 1.1rem;
         }
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+        
+        /* SISTEMA DE PESTAÑAS */
+        .tabs {
+            display: flex;
+            gap: 10px;
             margin-bottom: 25px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 10px;
+            justify-content: center;
         }
+        .tab-btn {
+            background: transparent;
+            border: 2px solid transparent;
+            color: var(--text-muted);
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .tab-btn:hover:not(.active) {
+            background: #e2e8f0;
+        }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* TARJETAS Y COMPONENTES */
         .card {
             background-color: var(--bg-card);
             border-radius: 16px;
             padding: 25px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             border: 1px solid var(--border);
             margin-bottom: 25px;
         }
         .section-title {
-            color: var(--dark);
+            color: var(--text-main);
             font-size: 1.25rem;
             margin-top: 0;
-            border-bottom: 2px solid var(--border);
+            border-bottom: 1px solid var(--border);
             padding-bottom: 10px;
-        }
-        .progress-bar-container {
-            background: #e2e8f0;
-            border-radius: 10px;
-            height: 12px;
-            width: 100%;
-            overflow: hidden;
-            margin: 10px 0;
-        }
-        .progress-bar {
-            background: linear-gradient(135deg, var(--primary), var(--accent-purple));
-            height: 100%;
-            width: 1.6%;
-            border-radius: 10px;
         }
         .selector-row {
             display: flex;
@@ -102,7 +120,7 @@
             margin-bottom: 6px;
             font-weight: 600;
         }
-        select, textarea, input[type="text"] {
+        select, input[type="text"] {
             width: 100%;
             background: #f1f5f9;
             color: var(--text-main);
@@ -114,7 +132,7 @@
             box-sizing: border-box;
         }
         .btn {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            background: var(--primary);
             color: white;
             border: none;
             padding: 14px 20px;
@@ -123,39 +141,22 @@
             font-size: 1rem;
             cursor: pointer;
             width: 100%;
-            box-shadow: 0 4px 15px rgba(2,132,199,0.3);
             transition: opacity 0.2s;
         }
         .btn:hover { opacity: 0.9; }
+        .btn-voice {
+            background: var(--accent-purple);
+            margin-bottom: 15px;
+        }
         .bloque-clase {
             background: #f8fafc;
-            border-left: 5px solid var(--accent-purple);
+            border-left: 5px solid var(--primary);
             padding: 15px;
             margin-bottom: 15px;
             border-radius: 0 10px 10px 0;
         }
-        .bloque-clase h4 { margin: 0 0 8px 0; color: var(--dark); }
-        .audio-box {
-            background: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .audio-box button {
-            background: var(--success);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            width: auto;
-        }
-        /* Chat de la Profesora IA */
+        
+        /* CHAT IA */
         .chat-box {
             background: #f8fafc;
             border-radius: 10px;
@@ -179,7 +180,6 @@
             background: #e0f2fe;
             color: var(--primary-dark);
             align-self: flex-start;
-            border: 1px solid #bae6fd;
         }
         .msg.alumno {
             background: var(--primary);
@@ -191,6 +191,40 @@
             gap: 10px;
         }
         .chat-input-area button { width: auto; }
+
+        /* REJILLA DE HERRAMIENTAS (SALA DE ENSAYO) */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .tool-card {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: var(--primary);
+        }
+        .tool-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .tool-title {
+            font-weight: bold;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+        .tool-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
     </style>
 </head>
 <body>
@@ -198,117 +232,153 @@
     <div class="container">
         <header>
             <h1>🎤 CANTO FOREVER</h1>
-            <p>Programa Intensivo de Formación Vocal · 3 Meses · 60 Clases · 2 Horas Diarias</p>
+            <p>Programa Intensivo & Sala de Ensayo</p>
         </header>
 
-        <!-- Dashboard General -->
-        <div class="dashboard-grid">
-            <div class="card" style="margin-bottom: 0;">
-                <h3 class="section-title">📊 Tu Progreso en el Programa</h3>
-                <p><strong>Etapa Actual:</strong> Mes 1 — Construye tu Instrumento</p>
-                <p><strong>Clase Activa:</strong> Día 1 (2 Horas de Duración)</p>
-                <div class="progress-bar-container">
-                    <div class="progress-bar" id="barra-progreso"></div>
-                </div>
-                <small style="color: var(--text-muted);">Clase 1 de 60 completadas (1.6% del programa total)</small>
-            </div>
-            <div class="card" style="margin-bottom: 0;">
-                <h3 class="section-title">🎯 Estadísticas Generales</h3>
-                <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: var(--text-muted);">
-                    <li>🎓 Clases Estudiadas: <strong style="color: var(--dark);">1 / 60</strong></li>
-                    <li>⏱️ Horas de Práctica: <strong style="color: var(--dark);">2 hrs</strong></li>
-                    <li>🎵 Biblioteca de Ejercicios: <strong style="color: var(--dark);">Activa</strong></li>
-                    <li>⭐ Constancia Semanal: <strong style="color: var(--success);">100%</strong></li>
-                </ul>
-            </div>
+        <!-- PESTAÑAS DE NAVEGACIÓN -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="cambiarPestana('clases', this)">📚 Aula Teórica</button>
+            <button class="tab-btn" onclick="cambiarPestana('herramientas', this)">🛠️ Sala de Ensayo</button>
         </div>
 
-        <!-- Selector del Programa Intensivo de 3 Meses -->
-        <div class="card">
-            <h2 class="section-title">📅 Plan de Estudios Exhaustivo (60 Clases)</h2>
-            <div class="selector-row">
-                <div class="selector-group">
-                    <label for="select-mes">Etapa / Mes:</label>
-                    <select id="select-mes" onchange="actualizarDias()">
-                        <option value="mes1">Mes 1: Construye tu Instrumento (Fundamentos)</option>
-                        <option value="mes2">Mes 2: Desarrolla tu Voz (Técnica y Registros)</option>
-                        <option value="mes3">Mes 3: Conviértete en Cantante (Repertorio e Interpretación)</option>
-                    </select>
+        <!-- ========================================== -->
+        <!-- PESTAÑA 1: AULA TEÓRICA (El Programa de 3 Meses) -->
+        <!-- ========================================== -->
+        <div id="clases" class="tab-content active">
+            <!-- Selector de Clases -->
+            <div class="card">
+                <h2 class="section-title">📅 Plan de Estudios (60 Clases)</h2>
+                <div class="selector-row">
+                    <div class="selector-group">
+                        <label for="select-mes">Módulo:</label>
+                        <select id="select-mes">
+                            <option value="mes1">Mes 1: Construye tu Instrumento</option>
+                            <option value="mes2">Mes 2: Desarrolla tu Voz</option>
+                            <option value="mes3">Mes 3: Conviértete en Cantante</option>
+                        </select>
+                    </div>
+                    <div class="selector-group">
+                        <label for="select-dia">Clase del Día:</label>
+                        <select id="select-dia">
+                            <option value="dia1">Día 1: ¿Qué es la voz y cómo funciona?</option>
+                            <option value="dia2">Día 2: Alineación y Respiración</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="selector-group">
-                    <label for="select-dia">Clase del Día:</label>
-                    <select id="select-dia">
-                        <option value="dia1">Día 1: ¿Qué es la voz y cómo funciona? Postura y Respiración</option>
-                        <option value="dia2">Día 2: Alineación corporal, relajación de mandíbula y cuello</option>
-                        <option value="dia3">Día 3: El fuelle respiratorio y control del aire abdominal</option>
-                        <option value="dia4">Día 4: Zumbidos iniciales y colocación en la máscara</option>
-                        <option value="dia5">Día 5: Consolidación, ritmo básico y primera autoevaluación</option>
-                    </select>
-                </div>
-            </div>
-            <button class="btn" onclick="cargarClaseIntensiva()">▶ Iniciar Clase Guiada de 2 Horas</button>
-        </div>
-
-        <!-- Contenido de la Clase Activa (Estructura de Bloques Completa) -->
-        <div class="card" id="pantalla-clase">
-            <h2 style="color: var(--dark); margin-top:0;">MES 1 — DÍA 1: ¿Qué es la voz y cómo funciona? Postura y Respiración</h2>
-            <p style="color: var(--text-muted); margin-bottom: 20px;">Bienvenido a tu programa intensivo. Durante estas 2 horas de clase te guiaré paso a paso combinando teoría profunda, práctica y evaluación continua.</p>
-
-            <div class="bloque-clase">
-                <h4>⏱️ Bloque 1 & 2 (15 min) — Bienvenida, Revisión de Estado y Diálogo</h4>
-                <p>La profesora IA evalúa cómo te sientes, revisa tu postura inicial y alinea tus expectativas para el entrenamiento de hoy.</p>
+                <button class="btn" onclick="cargarClaseIntensiva()">▶ Cargar Clase</button>
             </div>
 
-            <div class="bloque-clase">
-                <h4>⏱️ Bloque 3 & 4 (45 min) — Teoría Progresiva y Demostración Auditiva</h4>
-                <p><strong>¿Qué es y cómo se produce?</strong> Las cuerdas vocales ubicadas en la laringe vibran gracias a la presión del aire subglótico regulado por el diafragma y la faja abdominal.<br>
-                <em>Errores comunes:</em> Levantar los hombros al respirar o tensar la garganta al emitir sonido.</p>
-                <div class="audio-box">
-                    <span>🔊 Escucha la nota base de referencia antes de empezar los ejercicios:</span>
-                    <button onclick="reproducirTonoGuia(440)">Reproducer Nota A4 (440Hz)</button>
+            <!-- Contenido de la Clase -->
+            <div class="card" id="pantalla-clase">
+                <h2 style="color: var(--text-main); margin-top:0;" id="titulo-clase">MES 1 — DÍA 1: ¿Qué es la voz?</h2>
+                
+                <button class="btn btn-voice" onclick="profesoraHabla('¡Hola! Bienvenido al Día 1 de Canto Forever. Hoy vamos a empezar por lo más importante: entender qué es la voz y cómo tu cuerpo se convierte en un instrumento. Ponte cómodo, relaja los hombros y escúchame con atención...')">
+                    ▶️ 🗣️ Escuchar la clase dictada por la profesora
+                </button>
+
+                <div class="bloque-clase">
+                    <h4>Teoría y Funcionamiento</h4>
+                    <p>Las cuerdas vocales vibran gracias al flujo de aire controlado por el diafragma. Si levantas los hombros, tensas el cuello.</p>
                 </div>
             </div>
 
-            <div class="bloque-clase">
-                <h4>⏱️ Bloque 5 al 9 (45 min) — Práctica Vocal, Técnica e Interacción</h4>
-                <p>• <strong>Respiración:</strong> Inhalación nasal profunda en 4 tiempos expandiendo costillas flotantes sin mover el pecho.<br>
-                • <strong>Calentamiento:</strong> Ejercicios de siseo continuo ("SSSS") y zumbidos ("MMM") para despertar la resonancia.</p>
-            </div>
-
-            <div class="bloque-clase">
-                <h4>⏱️ Bloque 10 al 13 (15 min) — Aplicación, Autoevaluación y Tarea Asignada</h4>
-                <p>Califica tu esfuerzo, registra tus sensaciones en el cuaderno y recibe tu tarea para consolidar el hábito vocal.</p>
-            </div>
-        </div>
-
-        <!-- Cuaderno del Alumno (Bitácora Personal) -->
-        <div class="card">
-            <h2 class="section-title">📓 Mi Cuaderno de Canto — Apuntes y Bitácora</h2>
-            <div style="display: grid; gap: 15px;">
-                <div>
-                    <label>¿Qué descubriste hoy sobre tu voz y qué dificultades encontraste?</label>
-                    <textarea id="apuntes-alumno" rows="3" placeholder="Escribe tus apuntes, dudas o sensaciones de la clase..."></textarea>
+            <!-- Chat IA -->
+            <div class="card">
+                <h2 class="section-title">👩‍🏫 Habla con tu Profesora IA</h2>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Escribe tus dudas y la profesora te responderá con texto y voz:</p>
+                <div class="chat-box" id="chat-mensajes">
+                    <div class="msg profesora">¡Hola! Comencemos el entrenamiento. ¿Tienes dudas sobre la teoría de hoy?</div>
                 </div>
-                <button class="btn" style="background: var(--accent-teal);" onclick="guardarApuntes()">Guardar en mi Bitácora Personal</button>
+                <div class="chat-input-area">
+                    <input type="text" id="input-pregunta" placeholder="Ej: Me duele un poco el cuello al cantar..." onkeypress="if(event.key === 'Enter') enviarPreguntaIA()">
+                    <button class="btn" onclick="enviarPreguntaIA()">Enviar</button>
+                </div>
             </div>
         </div>
 
-        <!-- Profesora IA en Directo (Conexión Gemini en el Servidor) -->
-        <div class="card">
-            <h2 class="section-title">👩‍🏫 Pregúntale a tu Profesora IA</h2>
-            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 12px;">Conversa en tiempo real con tu profesora sobre técnica, teoría, corrección de errores o dudas de la clase:</p>
-            <div class="chat-box" id="chat-mensajes">
-                <div class="msg profesora">¡Hola! Soy tu profesora de Canto Forever. Comencemos este programa intensivo de 3 meses. ¿Tienes alguna duda sobre la postura o la respiración de la clase de hoy?</div>
-            </div>
-            <div class="chat-input-area">
-                <input type="text" id="input-pregunta" placeholder="Ej: Profesora, ¿cómo sé si estoy usando bien el diafragma?" onkeypress="if(event.key === 'Enter') enviarPreguntaIA()">
-                <button class="btn" onclick="enviarPreguntaIA()">Consultar</button>
+        <!-- ========================================== -->
+        <!-- PESTAÑA 2: SALA DE ENSAYO (Herramientas Prácticas) -->
+        <!-- ========================================== -->
+        <div id="herramientas" class="tab-content">
+            <div class="card">
+                <h2 class="section-title">🛠️ Tus Herramientas Vocales</h2>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Aplica la teoría usando estas herramientas interactivas recomendadas por tu profesora.</p>
+                
+                <div class="tools-grid">
+                    <div class="tool-card" onclick="alert('Iniciando Test de Rango Vocal... (Herramienta en construcción)')">
+                        <div class="tool-icon">🎤</div>
+                        <div class="tool-title">Test de Rango Vocal</div>
+                        <div class="tool-desc">Descubre tu tipo de voz y tus octavas límite.</div>
+                    </div>
+
+                    <div class="tool-card" onclick="alert('Abriendo Afinador de Voz... (Herramienta en construcción)')">
+                        <div class="tool-icon">🎯</div>
+                        <div class="tool-title">Afinador de Voz</div>
+                        <div class="tool-desc">Canta una nota y comprueba visualmente tu afinación.</div>
+                    </div>
+
+                    <div class="tool-card" onclick="alert('Iniciando Ejercicio 4-4-8-2... (Herramienta en construcción)')">
+                        <div class="tool-icon">💨</div>
+                        <div class="tool-title">Control de Respiración</div>
+                        <div class="tool-desc">Entrena tu capacidad de aire con ciclos guiados (Ej: 4-4-8-2).</div>
+                    </div>
+
+                    <div class="tool-card" onclick="reproducirTonoGuia(440)">
+                        <div class="tool-icon">🎧</div>
+                        <div class="tool-title">Tono Guía (Escuchar A4)</div>
+                        <div class="tool-desc">Reproduce un tono puro a 440Hz para afinar tu oído ahora mismo.</div>
+                    </div>
+                </div>
             </div>
         </div>
+
     </div>
 
+    <!-- SCRIPT LOGIC -->
     <script>
-        // Generador de Tonos Web nativo (Audio API)
+        // 1. SISTEMA DE PESTAÑAS (Cambiar entre Aula y Sala de Ensayo)
+        function cambiarPestana(idDestino, btn) {
+            // Ocultar todas las pestañas
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            
+            // Mostrar la seleccionada
+            document.getElementById(idDestino).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        // 2. SISTEMA DE VOZ (Text-to-Speech)
+        function profesoraHabla(texto) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const mensajeHablado = new SpeechSynthesisUtterance(texto);
+                mensajeHablado.lang = 'es-ES'; 
+                mensajeHablado.pitch = 1.1;    
+                mensajeHablado.rate = 0.95;    
+                window.speechSynthesis.speak(mensajeHablado);
+            } else {
+                alert("Tu navegador no soporta voz. Intenta en Chrome o Edge.");
+            }
+        }
+
+        // 3. CARGAR CLASE TEÓRICA
+        function cargarClaseIntensiva() {
+            const selectDia = document.getElementById('select-dia');
+            const textoDia = selectDia.options[selectDia.selectedIndex].text;
+            
+            document.getElementById('pantalla-clase').innerHTML = `
+                <h2 style="color: var(--text-main); margin-top:0;">${textoDia}</h2>
+                <button class="btn btn-voice" onclick="profesoraHabla('Clase cargada. Revisa la teoría y luego ve a la pestaña de Sala de Ensayo para aplicar lo aprendido con las herramientas.')">
+                    ▶️ 🗣️ Escuchar introducción de la profesora
+                </button>
+                <div class="bloque-clase">
+                    <h4>Teoría Progresiva</h4>
+                    <p>Contenido teórico actualizado para tu entrenamiento de hoy. Recuerda que la respiración es la base de todo cantante.</p>
+                </div>
+            `;
+        }
+
+        // 4. GENERADOR DE TONO PARA ENTRENAMIENTO AUDITIVO
         function reproducirTonoGuia(frecuencia) {
             try {
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -327,94 +397,25 @@
                 osc.start();
                 osc.stop(audioCtx.currentTime + 3);
             } catch(e) {
-                alert("Haz clic en la página primero para habilitar los permisos de audio.");
+                alert("Haz clic en la página primero para habilitar el audio.");
             }
         }
 
-        function actualizarDias() {
-            const mes = document.getElementById('select-mes').value;
-            const selectDia = document.getElementById('select-dia');
-            selectDia.innerHTML = "";
-
-            if(mes === 'mes1') {
-                selectDia.innerHTML = `
-                    <option value="dia1">Día 1: ¿Qué es la voz y cómo funciona? Postura y Respiración</option>
-                    <option value="dia2">Día 2: Alineación corporal, relajación de mandíbula y cuello</option>
-                    <option value="dia3">Día 3: El fuelle respiratorio y control del aire abdominal</option>
-                    <option value="dia4">Día 4: Zumbidos iniciales y colocación en la máscara</option>
-                    <option value="dia5">Día 5: Consolidación, ritmo básico y primera autoevaluación</option>
-                `;
-            } else if(mes === 'mes2') {
-                selectDia.innerHTML = `
-                    <option value="dia1">Día 1: Introducción a los registros vocales (Pecho y Cabeza)</option>
-                    <option value="dia2">Día 2: El puente vocal y la transición de registros</option>
-                    <option value="dia3">Día 3: Desarrollo de la voz mixta y flexibilidad</option>
-                    <option value="dia4">Día 4: Proyección, dinámica y control de volumen</option>
-                    <option value="dia5">Día 5: Evaluación técnica intermedia de registros</option>
-                `;
-            } else if(mes === 'mes3') {
-                selectDia.innerHTML = `
-                    <option value="dia1">Día 1: Interpretación, emoción y fraseo expresivo</option>
-                    <option value="dia2">Día 2: Análisis de repertorio y preparación de canciones</option>
-                    <option value="dia3">Día 3: Técnica de micrófono y control en vivo</option>
-                    <option value="dia4">Día 4: Grabación, autoevaluación y corrección de errores</option>
-                    <option value="dia5">Día 5: Examen final integral y certificación del programa</option>
-                `;
-            }
-        }
-
-        function cargarClaseIntensiva() {
-            const mes = document.getElementById('select-mes').value;
-            const selectDia = document.getElementById('select-dia');
-            const textoDia = selectDia.options[selectDia.selectedIndex].text;
-            
-            document.getElementById('pantalla-clase').innerHTML = `
-                <h2 style="color: var(--dark); margin-top:0;">${mes.toUpperCase()} — ${textoDia}</h2>
-                <p style="color: var(--text-muted); margin-bottom: 20px;">Clase cargada con éxito. Estructurada bajo el programa intensivo de 2 horas de duración diaria.</p>
-                <div class="bloque-clase">
-                    <h4>⏱️ Bloque 1 a 4 — Teoría Progresiva y Explicación Exhaustiva</h4>
-                    <p>Análisis detallado de conceptos, funcionamiento físico, errores comunes y demostración auditiva guiada.</p>
-                </div>
-                <div class="bloque-clase">
-                    <h4>⏱️ Bloque 5 a 9 — Entrenamiento Práctico e Interactivo</h4>
-                    <p>Ejercicios vocales específicos, entrenamiento auditivo y uso del generador de tonos de referencia.</p>
-                </div>
-                <div class="bloque-clase">
-                    <h4>⏱️ Bloque 10 a 13 — Autoevaluación, Bitácora y Tarea</h4>
-                    <p>Cierre de la sesión de 2 horas con registro de progresos para la adaptación inteligente del sistema.</p>
-                </div>
-            `;
-            window.scrollTo({ top: 350, behavior: 'smooth' });
-        }
-
-        function guardarApuntes() {
-            const texto = document.getElementById('apuntes-alumno').value;
-            if(!texto.trim()) {
-                alert("Escribe tus reflexiones en el cuaderno antes de guardar.");
-                return;
-            }
-            alert("✅ Apuntes guardados con éxito en tu bitácora personal.");
-            document.getElementById('apuntes-alumno').value = "";
-        }
-
+        // 5. CHAT IA (Con texto y voz)
         async function enviarPreguntaIA() {
             const input = document.getElementById('input-pregunta');
             const texto = input.value.trim();
             if(!texto) return;
 
-            // Obtener contexto visual actual de la interfaz del alumno
             const mesSeleccionado = document.getElementById('select-mes').value;
-            const selectDia = document.getElementById('select-dia');
-            const claseTexto = selectDia.options[selectDia.selectedIndex].text;
-            const apuntesActuales = document.getElementById('apuntes-alumno').value;
-
+            
             const chatBox = document.getElementById('chat-mensajes');
             chatBox.innerHTML += `<div class="msg alumno">${texto}</div>`;
             input.value = '';
             chatBox.scrollTop = chatBox.scrollHeight;
 
             const idTemp = "temp-" + Date.now();
-            chatBox.innerHTML += `<div class="msg profesora" id="${idTemp}">👩‍🏫 Analizando tu avance y preparando la retroalimentación vocal...</div>`;
+            chatBox.innerHTML += `<div class="msg profesora" id="${idTemp}">Analizando tu pregunta...</div>`;
             chatBox.scrollTop = chatBox.scrollHeight;
 
             try {
@@ -424,17 +425,22 @@
                     body: JSON.stringify({ 
                         mensaje: texto, 
                         mesActual: mesSeleccionado,
-                        claseActual: claseTexto,
-                        apuntesAlumno: apuntesActuales
+                        claseActual: "Día Activo"
                     })
                 });
                 const data = await res.json();
                 
                 document.getElementById(idTemp).remove();
                 chatBox.innerHTML += `<div class="msg profesora">${data.respuesta}</div>`;
+                
+                // La profesora lee su respuesta
+                profesoraHabla(data.respuesta);
+
             } catch (err) {
                 document.getElementById(idTemp).remove();
-                chatBox.innerHTML += `<div class="msg profesora">⚠️ Ocurrió un error al procesar tu consulta. Si sientes dolor o molestias en la garganta, detén la práctica de inmediato.</div>`;
+                const errorMsg = "Tuve un problema de conexión. Mientras lo resolvemos, recuerda cuidar tu voz.";
+                chatBox.innerHTML += `<div class="msg profesora">⚠️ ${errorMsg}</div>`;
+                profesoraHabla(errorMsg);
             }
             chatBox.scrollTop = chatBox.scrollHeight;
         }
