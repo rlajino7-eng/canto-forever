@@ -245,7 +245,6 @@
         <!-- PESTAÑA 1: AULA TEÓRICA (El Programa de 3 Meses) -->
         <!-- ========================================== -->
         <div id="clases" class="tab-content active">
-            <!-- Selector de Clases -->
             <div class="card">
                 <h2 class="section-title">📅 Plan de Estudios (60 Clases)</h2>
                 <div class="selector-row">
@@ -268,21 +267,17 @@
                 <button class="btn" onclick="cargarClaseIntensiva()">▶ Cargar Clase</button>
             </div>
 
-            <!-- Contenido de la Clase -->
             <div class="card" id="pantalla-clase">
                 <h2 style="color: var(--text-main); margin-top:0;" id="titulo-clase">MES 1 — DÍA 1: ¿Qué es la voz?</h2>
-                
                 <button class="btn btn-voice" onclick="profesoraHabla('¡Hola! Bienvenido al Día 1 de Canto Forever. Hoy vamos a empezar por lo más importante: entender qué es la voz y cómo tu cuerpo se convierte en un instrumento. Ponte cómodo, relaja los hombros y escúchame con atención...')">
                     ▶️ 🗣️ Escuchar la clase dictada por la profesora
                 </button>
-
                 <div class="bloque-clase">
                     <h4>Teoría y Funcionamiento</h4>
                     <p>Las cuerdas vocales vibran gracias al flujo de aire controlado por el diafragma. Si levantas los hombros, tensas el cuello.</p>
                 </div>
             </div>
 
-            <!-- Chat IA -->
             <div class="card">
                 <h2 class="section-title">👩‍🏫 Habla con tu Profesora IA</h2>
                 <p style="color: var(--text-muted); font-size: 0.9rem;">Escribe tus dudas y la profesora te responderá con texto y voz:</p>
@@ -300,27 +295,46 @@
         <!-- PESTAÑA 2: SALA DE ENSAYO (Herramientas Prácticas) -->
         <!-- ========================================== -->
         <div id="herramientas" class="tab-content">
-            <div class="card">
-                <h2 class="section-title">🛠️ Tus Herramientas Vocales</h2>
-                <p style="color: var(--text-muted); margin-bottom: 20px;">Aplica la teoría usando estas herramientas interactivas recomendadas por tu profesora.</p>
+            
+            <!-- EL NUEVO AFINADOR Y MEDIDOR EN TIEMPO REAL -->
+            <div class="card" style="background: #1e293b; color: white;">
+                <h2 class="section-title" style="color: white; border-bottom: 1px solid #334155;">🎙️ Afinador y Test de Rango en Vivo</h2>
+                <p style="color: #94a3b8; margin-bottom: 20px;">Canta una nota sostenida (usa la vocal "U" u "O"). El sistema usará tu micrófono para analizar tu frecuencia en tiempo real.</p>
                 
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <button class="btn" style="background: var(--accent-teal); width: auto; font-size: 1.1rem; padding: 15px 30px;" onclick="iniciarMicrofono()">
+                        🎤 Activar Micrófono
+                    </button>
+                </div>
+
+                <div style="background: #0f172a; border: 1px solid #334155; border-radius: 12px; padding: 30px; width: 80%; max-width: 400px; margin: 0 auto; text-align: center; box-shadow: inset 0 4px 6px rgba(0,0,0,0.3);">
+                    <span style="font-size: 0.9rem; color: #94a3b8; display: block; margin-bottom: 10px; font-weight: bold; letter-spacing: 1px;">NOTA DETECTADA</span>
+                    <div id="nota-detectada" style="font-size: 5rem; font-weight: bold; color: var(--text-main); text-shadow: 0 0 20px rgba(255,255,255,0.1);">--</div>
+                    <div id="frecuencia-detectada" style="font-size: 1.2rem; color: #64748b; margin-top: 5px;">0 Hz</div>
+                </div>
+            </div>
+
+            <!-- ESPACIO PARA SUBIR PISTAS (Siguiente Fase) -->
+            <div class="card">
+                <h2 class="section-title">📤 Evaluación de Pistas con IA</h2>
+                <p style="color: var(--text-muted); margin-bottom: 15px;">Sube tu grabación cantando sobre una pista. La profesora analizará tu afinación y ritmo.</p>
+                <div style="border: 2px dashed var(--border); padding: 30px; text-align: center; border-radius: 10px; background: #f8fafc;">
+                    <input type="file" id="archivo-audio" accept="audio/*" style="display: none;">
+                    <button class="btn" style="width: auto; background: var(--primary-dark);" onclick="document.getElementById('archivo-audio').click()">
+                        📁 Seleccionar Grabación
+                    </button>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 15px;">(La integración de carga de archivos requerirá actualizar el servidor en nuestro próximo paso)</p>
+                </div>
+            </div>
+
+            <!-- OTRAS HERRAMIENTAS -->
+            <div class="card">
+                <h2 class="section-title">🛠️ Herramientas Complementarias</h2>
                 <div class="tools-grid">
-                    <div class="tool-card" onclick="alert('Iniciando Test de Rango Vocal... (Herramienta en construcción)')">
-                        <div class="tool-icon">🎤</div>
-                        <div class="tool-title">Test de Rango Vocal</div>
-                        <div class="tool-desc">Descubre tu tipo de voz y tus octavas límite.</div>
-                    </div>
-
-                    <div class="tool-card" onclick="alert('Abriendo Afinador de Voz... (Herramienta en construcción)')">
-                        <div class="tool-icon">🎯</div>
-                        <div class="tool-title">Afinador de Voz</div>
-                        <div class="tool-desc">Canta una nota y comprueba visualmente tu afinación.</div>
-                    </div>
-
-                    <div class="tool-card" onclick="alert('Iniciando Ejercicio 4-4-8-2... (Herramienta en construcción)')">
+                    <div class="tool-card" onclick="alert('Iniciando Ejercicio 4-4-8-2... (Próxima actualización)')">
                         <div class="tool-icon">💨</div>
                         <div class="tool-title">Control de Respiración</div>
-                        <div class="tool-desc">Entrena tu capacidad de aire con ciclos guiados (Ej: 4-4-8-2).</div>
+                        <div class="tool-desc">Entrena tu capacidad de aire con ciclos guiados.</div>
                     </div>
 
                     <div class="tool-card" onclick="reproducirTonoGuia(440)">
@@ -334,20 +348,20 @@
 
     </div>
 
-    <!-- SCRIPT LOGIC -->
     <script>
-        // 1. SISTEMA DE PESTAÑAS (Cambiar entre Aula y Sala de Ensayo)
+        // ==========================================
+        // 1. SISTEMA DE PESTAÑAS
+        // ==========================================
         function cambiarPestana(idDestino, btn) {
-            // Ocultar todas las pestañas
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            
-            // Mostrar la seleccionada
             document.getElementById(idDestino).classList.add('active');
             btn.classList.add('active');
         }
 
+        // ==========================================
         // 2. SISTEMA DE VOZ (Text-to-Speech)
+        // ==========================================
         function profesoraHabla(texto) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
@@ -361,11 +375,12 @@
             }
         }
 
+        // ==========================================
         // 3. CARGAR CLASE TEÓRICA
+        // ==========================================
         function cargarClaseIntensiva() {
             const selectDia = document.getElementById('select-dia');
             const textoDia = selectDia.options[selectDia.selectedIndex].text;
-            
             document.getElementById('pantalla-clase').innerHTML = `
                 <h2 style="color: var(--text-main); margin-top:0;">${textoDia}</h2>
                 <button class="btn btn-voice" onclick="profesoraHabla('Clase cargada. Revisa la teoría y luego ve a la pestaña de Sala de Ensayo para aplicar lo aprendido con las herramientas.')">
@@ -378,22 +393,20 @@
             `;
         }
 
-        // 4. GENERADOR DE TONO PARA ENTRENAMIENTO AUDITIVO
+        // ==========================================
+        // 4. GENERADOR DE TONO 
+        // ==========================================
         function reproducirTonoGuia(frecuencia) {
             try {
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
-                
                 osc.type = 'sine';
                 osc.frequency.value = frecuencia; 
-                
                 gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
                 gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 3); 
-                
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
-                
                 osc.start();
                 osc.stop(audioCtx.currentTime + 3);
             } catch(e) {
@@ -401,15 +414,17 @@
             }
         }
 
-        // 5. CHAT IA (Con texto y voz)
+        // ==========================================
+        // 5. CHAT IA
+        // ==========================================
         async function enviarPreguntaIA() {
             const input = document.getElementById('input-pregunta');
             const texto = input.value.trim();
             if(!texto) return;
 
             const mesSeleccionado = document.getElementById('select-mes').value;
-            
             const chatBox = document.getElementById('chat-mensajes');
+            
             chatBox.innerHTML += `<div class="msg alumno">${texto}</div>`;
             input.value = '';
             chatBox.scrollTop = chatBox.scrollHeight;
@@ -422,20 +437,12 @@
                 const res = await fetch('/api/profesora', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ 
-                        mensaje: texto, 
-                        mesActual: mesSeleccionado,
-                        claseActual: "Día Activo"
-                    })
+                    body: JSON.stringify({ mensaje: texto, mesActual: mesSeleccionado, claseActual: "Día Activo" })
                 });
                 const data = await res.json();
-                
                 document.getElementById(idTemp).remove();
                 chatBox.innerHTML += `<div class="msg profesora">${data.respuesta}</div>`;
-                
-                // La profesora lee su respuesta
                 profesoraHabla(data.respuesta);
-
             } catch (err) {
                 document.getElementById(idTemp).remove();
                 const errorMsg = "Tuve un problema de conexión. Mientras lo resolvemos, recuerda cuidar tu voz.";
@@ -443,6 +450,85 @@
                 profesoraHabla(errorMsg);
             }
             chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        // ==========================================
+        // 6. MOTOR DE AUDIO: DETECCIÓN DE TONO (PITCH)
+        // ==========================================
+        let audioContext;
+        let analyser;
+        let buferDatos;
+        const notasMusicales = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+
+        async function iniciarMicrofono() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                analyser = audioContext.createAnalyser();
+                analyser.fftSize = 2048;
+                
+                const fuenteMic = audioContext.createMediaStreamSource(stream);
+                fuenteMic.connect(analyser);
+                
+                buferDatos = new Float32Array(analyser.fftSize);
+                
+                document.getElementById('nota-detectada').innerText = "🔊";
+                document.getElementById('nota-detectada').style.color = "#f8fafc";
+                document.getElementById('frecuencia-detectada').innerText = "Escuchando tu voz...";
+                
+                detectarTono();
+            } catch (err) {
+                alert("❌ Necesitas dar permisos de micrófono en tu navegador para usar el afinador en vivo.");
+            }
+        }
+
+        function detectarTono() {
+            analyser.getFloatTimeDomainData(buferDatos);
+            let frecuencia = calcularFrecuencia(buferDatos, audioContext.sampleRate);
+
+            if (frecuencia !== -1) {
+                let nota = frecuenciaANota(frecuencia);
+                document.getElementById('nota-detectada').innerText = nota;
+                document.getElementById('nota-detectada').style.color = "#38bdf8"; // Azul vibrante al detectar
+                document.getElementById('frecuencia-detectada').innerText = Math.round(frecuencia) + " Hz";
+            }
+
+            requestAnimationFrame(detectarTono);
+        }
+
+        function frecuenciaANota(frecuencia) {
+            let numeroNota = 12 * (Math.log2(frecuencia / 440)) + 69;
+            let octava = Math.floor(numeroNota / 12) - 1;
+            let nombreNota = notasMusicales[Math.round(numeroNota) % 12];
+            return nombreNota + octava;
+        }
+
+        function calcularFrecuencia(bufer, sampleRate) {
+            let tamaño = bufer.length;
+            let rms = 0;
+            
+            for (let i = 0; i < tamaño; i++) { rms += bufer[i] * bufer[i]; }
+            rms = Math.sqrt(rms / tamaño);
+            if (rms < 0.01) return -1; // Silencio
+
+            let r1 = 0, r2 = tamaño - 1, umbral = 0.2;
+            for (let i = 0; i < tamaño / 2; i++) if (Math.abs(bufer[i]) < umbral) { r1 = i; break; }
+            for (let i = 1; i < tamaño / 2; i++) if (Math.abs(bufer[tamaño - i]) < umbral) { r2 = tamaño - i; break; }
+
+            bufer = bufer.slice(r1, r2);
+            tamaño = bufer.length;
+            let c = new Array(tamaño).fill(0);
+            for (let i = 0; i < tamaño; i++)
+                for (let j = 0; j < tamaño - i; j++)
+                    c[i] = c[i] + bufer[j] * bufer[j + i];
+
+            let d = 0; while (c[d] > c[d + 1]) d++;
+            let maxval = -1, maxpos = -1;
+            for (let i = d; i < tamaño; i++) {
+                if (c[i] > maxval) { maxval = c[i]; maxpos = i; }
+            }
+            let T0 = maxpos;
+            return sampleRate / T0;
         }
     </script>
 </body>
