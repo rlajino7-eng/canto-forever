@@ -24,6 +24,14 @@
     .list{display:grid;gap:10px}.row{display:flex;align-items:center;justify-content:space-between;padding:15px;background:#fff;border:1px solid var(--line);border-radius:14px}.row strong{display:block}.row small{color:var(--muted)}
     textarea,input,select{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff;width:100%}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:15px}.empty{padding:35px;text-align:center;color:var(--muted);background:#fff;border:1px dashed #cfd5df;border-radius:18px}
     .toast{position:fixed;right:25px;bottom:25px;background:#182033;color:#fff;padding:12px 16px;border-radius:12px;opacity:0;transform:translateY(10px);transition:.25s;z-index:20}.toast.show{opacity:1;transform:none}
+    
+    /* ESTILOS DE LAS NUEVAS HERRAMIENTAS INTERACTIVAS */
+    .tuner-box { background: #1e293b; color: white; border-radius: 18px; padding: 30px; text-align: center; }
+    .note-display { font-size: 5rem; font-weight: bold; color: #38bdf8; margin: 15px 0; }
+    .breath-circle { width: 160px; height: 160px; border-radius: 50%; background: linear-gradient(135deg, var(--blue), var(--turq)); margin: 30px auto; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.3rem; font-weight: bold; transition: transform 4s ease-in-out; box-shadow: 0 0 30px rgba(20, 184, 166, 0.4); }
+    .breath-circle.inhale { transform: scale(1.6); }
+    .breath-circle.exhale { transform: scale(1); }
+
     @media(max-width:900px){.sidebar{transform:translateX(-100%);transition:.25s}.sidebar.open{transform:none}.main{margin-left:0}.icon-btn{display:block}.hero{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:1fr 1fr}.lesson-grid{grid-template-columns:1fr}}
     @media(max-width:600px){#app{padding:18px}.topbar{padding:0 18px}.cards,.stats,.grid2{grid-template-columns:1fr}.hero{padding:22px}.hero h1{font-size:28px}.class-header{align-items:flex-start;flex-direction:column}.lesson-main,.lesson-side{padding:18px}}
   </style>
@@ -36,6 +44,7 @@
       <button class="nav-btn" data-view="classes">🎓 <span>Mis clases</span></button>
       <button class="nav-btn" data-view="exercises">🎯 <span>Ejercicios</span></button>
       <button class="nav-btn" data-view="ear">👂 <span>Entrenamiento auditivo</span></button>
+      <button class="nav-btn" data-view="tools">🛠️ <span>Sala de ensayo</span></button>
       <button class="nav-btn" data-view="record">🎤 <span>Mi voz</span></button>
       <button class="nav-btn" data-view="progress">📊 <span>Mi progreso</span></button>
       <button class="nav-btn" data-view="notebook">📓 <span>Mi cuaderno</span></button>
@@ -58,7 +67,7 @@
 
   <div id="toast" class="toast"></div>
 
-  <!-- LÓGICA INTEGRA DE LA APLICACIÓN -->
+  <!-- LÓGICA INTEGRA DE LA APLICACIÓN Y HERRAMIENTAS VOCALES -->
   <script>
     const STORE_KEY = "cantoForeverProgress";
     function loadState() {
@@ -112,7 +121,7 @@
       ["Intervalos","oido","Reconocer y reproducir distancias entre notas."],
       ["Afinación avanzada","afinacion","Aumentar precisión y estabilidad de afinación."],
       ["Respiración aplicada","respiracion","Usar la respiración dentro de frases musicales."],
-      ["Musicalidad y fraseo","musicalidad","Comenzar a tomar decisiones musicales conscientes."],
+      ["Musicalidad y fraseo","musicalidad","Comencemos a tomar decisiones musicales conscientes."],
       ["Interpretación","interpretacion","Trabajar intención y comunicación."],
       ["Emoción y expresión","interpretacion","Relacionar emoción, intención y expresión vocal."],
       ["Fraseo","interpretacion","Construir frases con dirección musical."],
@@ -132,8 +141,7 @@
       ["Canción completa: preparación","repertorio","Preparar una canción siguiendo un proceso completo."],
       ["Canción completa: práctica","repertorio","Practicar una canción completa por etapas."],
       ["Presentación final","evaluacion","Preparar la presentación final del programa."],
-      ["Evaluación vocal final","evaluacion","Evaluar técnica, oído, ritmo y musicalidad."],
-      ["Examen final Canto Forever","evaluacion","Integrar teoría, oído, técnica, interpretación y canción completa."]
+      ["Evaluación vocal final","evaluacion","Evaluar técnica, oído, ritmo y musicalidad."]
     ];
 
     const CLASSES = CLASS_TEMPLATE.map((x,i)=>({
@@ -244,6 +252,118 @@
     function earView(){
      app.innerHTML=`<div class="section-head"><div><h2>👂 Entrenamiento del oído</h2><p>Progresa desde grave/agudo hasta melodías y detección de afinación.</p></div></div><div class="cards">${["Grave / agudo","Reconocer notas","Repetir notas","Intervalos","Patrones","Melodías","Ritmos","Detectar errores de afinación"].map((x,i)=>`<div class="card"><span class="day">NIVEL ${i+1}</span><h3>${x}</h3><p class="muted">Ejercicio progresivo de percepción auditiva.</p><button class="btn secondary" onclick="playTone(${220+i*30})">▶️ Escuchar referencia</button></div>`).join("")}</div>`;
     }
+    
+    // --- NUEVA VISTA: SALA DE ENSAYO (Afinador y Respiración Interactiva) ---
+    function toolsView(){
+      app.innerHTML=`
+        <div class="section-head"><div><h2>🛠️ Sala de Ensayo</h2><p>Herramientas interactivas para entrenar tu voz con medición real.</p></div></div>
+        
+        <div class="grid2">
+          <!-- AFINADOR EN VIVO -->
+          <div class="card tuner-box">
+            <h3 style="margin-top:0; color:#38bdf8;">🎙️ Afinador de Voz en Vivo</h3>
+            <p style="color:#94a3b8; font-size:13px;">Canta una nota sostenida (vocal "U" u "O") frente a tu micrófono.</p>
+            <button class="btn primary" id="btn-microfono" onclick="iniciarAfinador()" style="margin: 15px 0;">🎤 Activar Micrófono</button>
+            <div class="note-display" id="afinador-nota">--</div>
+            <div id="afinador-freq" style="font-size:1.1rem; color:#cbd5e1;">0 Hz</div>
+          </div>
+
+          <!-- CONTROL DE RESPIRACIÓN ANIMADO -->
+          <div class="card" style="text-align: center;">
+            <h3 style="margin-top:0;">💨 Control de Respiración Guiado</h3>
+            <p class="muted">Sigue el ritmo de expansión y contracción para el soporte diafragmático.</p>
+            <div class="breath-circle" id="circulo-aire">Listo</div>
+            <button class="btn secondary" onclick="iniciarRespiracionGuiada()">▶️ Iniciar Ciclo (4-4-8)</button>
+          </div>
+        </div>`;
+    }
+
+    // Lógica del Afinador por Frecuencia
+    let audioCtx, analyser, dataArray;
+    const notasMusicales = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+
+    async function iniciarAfinador() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 2048;
+        const source = audioCtx.createMediaStreamSource(stream);
+        source.connect(analyser);
+        dataArray = new Float32Array(analyser.fftSize);
+        document.getElementById('btn-microfono').style.display = 'none';
+        detectarPitchEnVivo();
+        toast("Micrófono activado. Cantando...");
+      } catch (err) {
+        toast("❌ Debes permitir el uso del micrófono.");
+      }
+    }
+
+    function detectarPitchEnVivo() {
+      if(!analyser) return;
+      analyser.getFloatTimeDomainData(dataArray);
+      let freq = autoCorrelacionPitch(dataArray, audioCtx.sampleRate);
+      if (freq !== -1) {
+        let numeroNota = 12 * (Math.log2(freq / 440)) + 69;
+        let octava = Math.floor(numeroNota / 12) - 1;
+        let nombre = notasMusicales[Math.round(numeroNota) % 12];
+        const elNota = document.getElementById('afinador-nota');
+        const elFreq = document.getElementById('afinador-freq');
+        if(elNota && elFreq) {
+          elNota.innerText = nombre + octava;
+          elFreq.innerText = Math.round(freq) + " Hz";
+        }
+      }
+      requestAnimationFrame(detectarPitchEnVivo);
+    }
+
+    function autoCorrelacionPitch(buf, sampleRate) {
+      let rms = 0;
+      for (let i = 0; i < buf.length; i++) rms += buf[i] * buf[i];
+      rms = Math.sqrt(rms / buf.length);
+      if (rms < 0.01) return -1;
+      let r1 = 0, r2 = buf.length - 1, thres = 0.2;
+      for (let i = 0; i < buf.length / 2; i++) if (Math.abs(buf[i]) < thres) { r1 = i; break; }
+      for (let i = 1; i < buf.length / 2; i++) if (Math.abs(buf[buf.length - i]) < thres) { r2 = buf.length - i; break; }
+      buf = buf.slice(r1, r2);
+      let c = new Array(buf.length).fill(0);
+      for (let i = 0; i < buf.length; i++)
+        for (let j = 0; j < buf.length - i; j++) c[i] += buf[j] * buf[j + i];
+      let d = 0; while (c[d] > c[d + 1]) d++;
+      let maxval = -1, maxpos = -1;
+      for (let i = d; i < buf.length; i++) {
+        if (c[i] > maxval) { maxval = c[i]; maxpos = i; }
+      }
+      return sampleRate / maxpos;
+    }
+
+    // Lógica de Respiración Animada
+    let respTimer;
+    function iniciarRespiracionGuiada() {
+      const circulo = document.getElementById('circulo-aire');
+      if(!circulo) return;
+      clearInterval(respTimer);
+      
+      function cicloResp() {
+        circulo.innerText = "Inhala (4s)";
+        circulo.classList.remove('exhale');
+        circulo.classList.add('inhale');
+        setTimeout(() => {
+          if(circulo) circulo.innerText = "Sostén (4s)";
+        }, 4000);
+        setTimeout(() => {
+          if(circulo) {
+            circulo.innerText = "Exhala (8s)";
+            circulo.classList.remove('inhale');
+            circulo.classList.add('exhale');
+          }
+        }, 8000);
+      }
+      cicloResp();
+      respTimer = setInterval(cicloResp, 16000);
+      toast("Ciclo de respiración iniciado");
+    }
+
     function playTone(freq){const ctx=new (window.AudioContext||window.webkitAudioContext)(),o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=freq;o.type="sine";g.gain.value=.12;o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+1);toast(`Nota de referencia: ${Math.round(freq)} Hz`);}
     function recordView(){
      app.innerHTML=`<div class="section-head"><div><h2>🎤 Mi voz</h2><p>Graba tu práctica y escucha tu evolución. El análisis automático solo se mostrará cuando exista una medición real.</p></div></div>
@@ -264,11 +384,26 @@
     function addSong(){const song={name:document.getElementById("song").value,key:document.getElementById("key").value,difficulty:document.getElementById("difficulty").value,range:document.getElementById("range").value,obs:document.getElementById("obs").value};if(!song.name){toast("Escribe el nombre de la canción.");return}STATE.songs=STATE.songs||[];STATE.songs.push(song);saveState();renderSongs();toast("Canción agregada.");}
     function renderSongs(){const el=document.getElementById("songs");if(!el)return;el.innerHTML=(STATE.songs||[]).map((s,i)=>`<div class="row"><div><strong>${s.name}</strong><small>${s.key||"Tonalidad no registrada"} · ${s.difficulty||"Dificultad no registrada"} · ${s.range||"Rango no registrado"}</small></div><button class="btn danger" onclick="STATE.songs.splice(${i},1);saveState();renderSongs()">Eliminar</button></div>`).join("")||`<div class="empty">Todavía no tienes canciones registradas.</div>`;}
     function settingsView(){app.innerHTML=`<div class="section-head"><div><h2>⚙️ Configuración</h2><p>Datos de esta versión local.</p></div></div><div class="card"><h3>Progreso local</h3><p class="muted">Esta primera versión guarda el progreso en el navegador mediante localStorage.</p><button class="btn danger" onclick="if(confirm('¿Borrar todo el progreso?')){localStorage.removeItem(STORE_KEY);location.reload()}">Borrar progreso</button></div>`;}
-    function navigate(view){document.querySelectorAll(".nav-btn").forEach(b=>b.classList.toggle("active",b.dataset.view===view));({dashboard,classes:classesView,exercises:exercisesView,ear:earView,record:recordView,progress:progressView,notebook:notebookView,repertoire:repertoireView,settings:settingsView}[view]||dashboard)();}
+    
+    function navigate(view){
+      document.querySelectorAll(".nav-btn").forEach(b=>b.classList.toggle("active",b.dataset.view===view));
+      ({
+        dashboard,
+        classes:classesView,
+        exercises:exercisesView,
+        ear:earView,
+        tools:toolsView,
+        record:recordView,
+        progress:progressView,
+        notebook:notebookView,
+        repertoire:repertoireView,
+        settings:settingsView
+      }[view]||dashboard)();
+    }
+    
     document.querySelectorAll(".nav-btn").forEach(b=>b.addEventListener("click",()=>{navigate(b.dataset.view);document.querySelector(".sidebar").classList.remove("open")}));
     document.getElementById("menuToggle").onclick=()=>document.querySelector(".sidebar").classList.toggle("open");
     
-    // Grabadora de audio lógica
     let recorder=null, chunks=[], recordingStream=null;
     async function startRecording(){
       if(!navigator.mediaDevices?.getUserMedia){toast("Tu navegador no permite grabación de audio.");return;}
