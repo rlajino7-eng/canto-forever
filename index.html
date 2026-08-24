@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canto Forever — Tu profesora virtual de canto</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span>🎤</span><div><strong>CANTO</strong> FOREVER<small>Tu voz. Tu proceso.</small></div></div>
+    <nav>
+      <button class="nav-btn active" data-view="dashboard">🏠 <span>Inicio</span></button>
+      <button class="nav-btn" data-view="classes">🎓 <span>Mis clases</span></button>
+      <button class="nav-btn" data-view="exercises">🎯 <span>Ejercicios</span></button>
+      <button class="nav-btn" data-view="ear">👂 <span>Entrenamiento auditivo</span></button>
+      <button class="nav-btn" data-view="record">🎤 <span>Mi voz</span></button>
+      <button class="nav-btn" data-view="progress">📊 <span>Mi progreso</span></button>
+      <button class="nav-btn" data-view="notebook">📓 <span>Mi cuaderno</span></button>
+      <button class="nav-btn" data-view="repertoire">🎵 <span>Mi repertorio</span></button>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="mini-progress"><span>Programa</span><strong id="sideProgress">0 / 60</strong><div class="progress"><i id="sideBar"></i></div></div>
+      <button class="nav-btn" data-view="settings">⚙️ <span>Configuración</span></button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div><button id="menuToggle" class="icon-btn">☰</button><div class="eyebrow">ACADEMIA VIRTUAL DE CANTO</div></div>
+      <div class="top-actions"><span id="streak">🔥 0 días</span><button class="avatar">R</button></div>
+    </header>
+
+    <section id="app"></section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <script src="js/classes.js"></script>
+  <script src="js/exercises.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/teacher.js"></script>
+  <script src="js/progress.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
